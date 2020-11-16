@@ -23,6 +23,11 @@ the following ways (included are my hypotheses for how this will effect gameplay
    - Eliminates the turn order advantage
    - Prevents enemy range standoffs since there is not first strike advantage
    - Players will have to choose what to pay attention to during combat phase
+
+The following diagram further demonstrates the key change in gameplay over time. The traditional formula
+is shown on top with the proposed concurrent model below.
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/docs/readme-images/turn-order.jpg" width="80%">
+
 ### Not Implemented
 The archetype I am targeting has many complex systems. Due to the time constraints of this project some of
 the key elements that persist in the archetype will not be implemented in the concept:
