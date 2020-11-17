@@ -26,6 +26,7 @@ the following ways (included are my hypotheses for how this will effect gameplay
 
 The following diagram further demonstrates the key change in gameplay over time. The traditional formula
 is shown on top with the proposed concurrent model below.
+
 <img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/docs/readme-images/turn-order.jpg" width="80%">
 
 ### Not Implemented
