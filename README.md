@@ -27,7 +27,7 @@ the following ways (included are my hypotheses for how this will effect gameplay
 The following diagram further demonstrates the key change in gameplay over time. The traditional formula
 is shown on top with the proposed concurrent model below.
 
-<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/docs/readme-images/turn-order.jpg" width="80%">
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme Images/turn-order.jpg" width="80%">
 
 ### Not Implemented
 The archetype I am targeting has many complex systems. Due to the time constraints of this project some of
@@ -39,9 +39,9 @@ the key elements that persist in the archetype will not be implemented in the co
 ## Initial Concept Plan
 This plan details the goals to be achieved over a four week cycle. The following UML diagrams show the
 general program flow for the gameplay. Red regions show where un-implemented features would go tentatively.
-<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/docs/readme-images/top-level-loop.jpg" width="100%">
-<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/docs/readme-images/command-phase.jpg" width="100%">
-<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/docs/readme-images/attack-phase.jpg" width="100%">
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme Images/top-level-loop.jpg" width="100%">
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme Images/command-phase.jpg" width="100%">
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme Images/attack-phase.jpg" width="100%">
 ### Proof of Concept
 The proof of concept will only feature the top-level gameplay cycle. It will implement:
  - General Framework
@@ -91,28 +91,28 @@ This diagram shows how the player and competing AI will interface with the curso
 The player cursor is directly controlled by the mouse, while the AI cursor is directly driven
 by the agent using the action struct.
 
-<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/docs/readme-images/uml-cursors.jpg">
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme Images/uml-cursors.jpg">
 
 ### Phases Implementation
 This diagram shows how the top level game loop is enforced in a generalized way using events.
 
-<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/docs/readme-images/uml-phases.jpg">
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme Images/uml-phases.jpg">
 
 ### Commander Implementation
 The commander implements the behavior for actually setting unit routes. Subclasses are used to drive the AI agent
 and for the player to respond to toggling the spy mechanic and pausing.
 
-<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/docs/readme-images/uml-commanders.jpg">
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme Images/uml-commanders.jpg">
 
 ### Grid Implementation
 The grid contains the data for tiles and the actors that can exist on those tiles. Grid actors can implement
 special sprite behavior in response to how commanders interact with them.
 
-<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/docs/readme-images/uml-grid.jpg">
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme Images/uml-grid.jpg">
 
 ### Damage Table Implementation
 The damage table takes in designer specified pairs as a serialized struct and converts them to a table
 that other classes can quickly access when doing damage calculations.
 
-<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/docs/readme-images/uml-damage-table.jpg">
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme Images/uml-damage-table.jpg">
 
