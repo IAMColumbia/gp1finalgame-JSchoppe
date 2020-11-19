@@ -66,6 +66,10 @@ public sealed class Timer
             duration = value;
         }
     }
+    /// <summary>
+    /// True if this timer is currently running.
+    /// </summary>
+    public bool IsRunning { get { return isRunning; } }
     #endregion
     #region Public Timer Methods
     /// <summary>
@@ -80,6 +84,7 @@ public sealed class Timer
             isRunning = true;
             UpdateContext.Update += Update;
         }
+        Started();
     }
     /// <summary>
     /// Pauses the timer if it is currently running.

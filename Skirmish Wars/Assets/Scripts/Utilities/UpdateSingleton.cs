@@ -43,7 +43,7 @@ public static class UpdateContext
     private sealed class UpdateSingleton : MonoBehaviour
     {
         public event Action OnUpdate;
-        private void Update() { OnUpdate(); }
+        private void Update() { OnUpdate?.Invoke(); }
     }
     #endregion
 }
