@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-public enum UnitType
+﻿/// <summary>
+/// Defines how damage tables apply to units.
+/// </summary>
+public enum UnitType : byte
 {
     FootSoldier
 }
