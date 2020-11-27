@@ -12,7 +12,18 @@ public class CombatUnitRenderer : MonoBehaviour
 
     public NumberSpriteSet numberSpriteSet;
 
-    public CombatUnit drivingUnit;
+    [SerializeField] private CombatUnit drivingUnit = null;
+
+    private void Awake()
+    {
+        drivingUnit.PathChanged += OnPathChanged;
+    }
+
+    private void OnPathChanged(Vector2Int[] newPath)
+    {
+        movementChain.Chain =
+            drivingUnit.Grid.GridToWorld(newPath);
+    }
 
     public SpriteChainRenderer movementChain;
 }

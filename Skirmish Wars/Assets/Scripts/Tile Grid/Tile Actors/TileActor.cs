@@ -4,13 +4,27 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public abstract class TileActor
+public abstract class TileActor : MonoBehaviour
 {
-    public TileGrid grid;
 
-    public Team team;
+    [SerializeField] private TileGrid grid = null;
+    [SerializeField] private Team team = Team.Alpha;
 
-    public virtual void OnClick() { throw new NotImplementedException(); }
-    public virtual void OnDragNewTile(Vector2Int newTile) { throw new NotImplementedException(); }
-    public virtual void OnRelease(Vector2Int finalTile) { throw new NotImplementedException(); }
+    public TileGrid Grid { get { return grid; } }
+
+    public Team Team { get { return team; } }
+
+
+    public virtual void OnClick()
+    {
+        
+    }
+    public virtual void OnDragNewTile(Vector2Int newTile)
+    {
+        
+    }
+    public virtual void OnRelease(Vector2Int finalTile)
+    {
+
+    }
 }

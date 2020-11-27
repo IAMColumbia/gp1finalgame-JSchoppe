@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Terrain
+    uniqueID: 3596552307
+    locked: 0
+  - name: Movement Paths
+    uniqueID: 1996826927
+    locked: 0
+  - name: Battlefield Units
+    uniqueID: 1762701215
+    locked: 0
+  - name: Player Cursor
+    uniqueID: 3132327997
+    locked: 0
+  - name: GUI
+    uniqueID: 1717162031
+    locked: 0

@@ -1,23 +1,63 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class CursorController : MonoBehaviour
+/// <summary>
+/// Base class for cursor controllers.
+/// </summary>
+public abstract class CursorController : MonoBehaviour
 {
-    public event Action Clicked;
-    public event Action Released;
+    /// <summary>
+    /// Called when this cursor clicks.
+    /// </summary>
+    public abstract event Action<Vector2> Clicked;
 
-    public CursorRenderer cursor;
+    public event Action<Vector2> Drag;
+    /// <summary>
+    /// Called when this cursor releases.
+    /// </summary>
+    public abstract event Action<Vector2> Released;
+
+    [SerializeField] protected TileGrid grid = null;
+
+
+    [SerializeField] protected CursorRenderer cursor = null;
 
     protected virtual void Start()
     {
-        throw new NotImplementedException();
+        Clicked += OnClick;
+        Released += OnRelease;
+    }
+
+    private Coroutine dragRoutine;
+    private void OnClick(Vector2 location)
+    {
+        cursor.RenderState = RenderedCursorState.Held;
+        dragRoutine = StartCoroutine(OnDragUpdate());
+    }
+
+    private void OnRelease(Vector2 location)
+    {
+        StopCoroutine(dragRoutine);
+        cursor.RenderState = RenderedCursorState.Active;
+    }
+
+    private IEnumerator OnDragUpdate()
+    {
+        while (true)
+        {
+            yield return null;
+            Drag?.Invoke(cursor.Location);
+        }
     }
 
     protected virtual void Update()
     {
-        throw new NotImplementedException();
+        // Lock the tile highlight effect to the nearest grid tile.
+        cursor.TileLocation =
+            grid.GridToWorld(grid.WorldToGrid(cursor.Location));
     }
 }

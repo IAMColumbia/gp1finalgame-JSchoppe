@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
+
 public enum Priority
 {
     High, Low
@@ -13,6 +15,9 @@ public class AICursorController : CursorController
     public bool isClicked;
 
     public List<CursorAction> actions;
+
+    public override event Action<Vector2> Clicked;
+    public override event Action<Vector2> Released;
 
     public void ClearActions()
     {
