@@ -1,0 +1,33 @@
+{
+    "name": "Control Scheme",
+    "maps": [
+        {
+            "name": "Stage Gameplay",
+            "id": "c71ff5a8-585c-4116-8bb6-bf24bdb58679",
+            "actions": [
+                {
+                    "name": "Primary Mouse Button",
+                    "type": "Button",
+                    "id": "3ad7e5d1-c13b-4f49-8fdd-8a4543637b9c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "280ff6f9-7068-49f4-9479-580b378df1cc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Primary Mouse Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
