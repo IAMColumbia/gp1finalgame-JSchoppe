@@ -4,13 +4,31 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+[Serializable]
+public class CombatUnitState
+{
+    [Range(10f, 100f)] public float hitPoints;
+    [Range(1, 100)] public int moveRange;
+    public UnitMovement movement;
+
+    public CombatUnitState()
+    {
+        hitPoints = 100f;
+        moveRange = 5;
+        movement = UnitMovement.Walking;
+    }
+}
+
 public class CombatUnit : TileActor
 {
-    public float hitPoints;
 
-    public int moveRange;
+    public CombatUnit(TileGrid grid, byte teamID, CombatUnitState initialState)
+        : base(grid, teamID)
+    {
+        state = initialState;
+    }
 
-    public UnitMovement movement;
+    public CombatUnitState state;
 
     public event Action<Vector2Int[]> PathChanged;
 
@@ -19,10 +37,7 @@ public class CombatUnit : TileActor
 
     public override void OnClick()
     {
-        movePath = new Vector2Int[]
-        {
-            Grid.WorldToGrid(transform.position)
-        };
+        movePath = new Vector2Int[] { location };
         PathChanged?.Invoke(movePath);
     }
 
@@ -40,7 +55,7 @@ public class CombatUnit : TileActor
                 break;
             }
         }
-        if (!intersectsOldPath && movePath.Length <= moveRange)
+        if (!intersectsOldPath && movePath.Length <= state.moveRange)
         {
             Array.Resize(ref movePath, movePath.Length + 1);
             movePath[movePath.Length - 1] = newTile;

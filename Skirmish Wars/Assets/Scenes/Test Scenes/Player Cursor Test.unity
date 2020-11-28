@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8c49c4cd84e1d4fbab21db50d93892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 1599175744}
+  gridInstance: {fileID: 1599175744}
 --- !u!1001 &717462542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -345,7 +345,7 @@ PrefabInstance:
         type: 3}
       propertyPath: grid
       value: 
-      objectReference: {fileID: 1599175744}
+      objectReference: {fileID: 0}
     - target: {fileID: 3595666491421972079, guid: acae165d13d64e243832acadca237a56,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -514,9 +514,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1392363544}
-  - component: {fileID: 1392363548}
   - component: {fileID: 1392363546}
+  - component: {fileID: 1392363549}
   - component: {fileID: 1392363545}
+  - component: {fileID: 1392363548}
   - component: {fileID: 1392363547}
   m_Layer: 0
   m_Name: Player Commander
@@ -566,12 +567,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1392363543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff461bc2112787f4ab302e1a0da35e06, type: 3}
+  m_Script: {fileID: 11500000, guid: de1cb5f796442a74fb0c70b07c3c6ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 1599175744}
-  cursor: {fileID: 1392363545}
-  playerCamera: {fileID: 486405562}
+  teamID: 0
+  controller: {fileID: 1392363549}
 --- !u!114 &1392363547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,7 +600,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1392363546}
+      - m_Target: {fileID: 1392363548}
         m_MethodName: OnPrimaryMouseButtonAction
         m_Mode: 0
         m_Arguments:
@@ -627,13 +627,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1392363543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aa651f44ac0d884b9fefa32ed2223d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 51160c254dacc634686d83da9827ed2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
-  grid: {fileID: 1599175744}
-  units: []
-  controller: {fileID: 1392363546}
+--- !u!114 &1392363549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392363543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8f57c8e3795e04d926b6af1228349e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorRenderer: {fileID: 1392363545}
+  holdingCamera: {fileID: 486405562}
+  listener: {fileID: 1392363548}
 --- !u!1 &1599175742
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,13 +685,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1599175742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92dffbe90f35fc74785e8312e403433c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a7443f66f3d1784699fd7677d0ffcc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   width: 14
   height: 8
   gridUnit: 1
-  commanders: []
 --- !u!1001 &3595666492728363077
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -697,7 +707,7 @@ PrefabInstance:
         type: 3}
       propertyPath: grid
       value: 
-      objectReference: {fileID: 1599175744}
+      objectReference: {fileID: 0}
     - target: {fileID: 3595666491421972079, guid: acae165d13d64e243832acadca237a56,
         type: 3}
       propertyPath: m_LocalPosition.x

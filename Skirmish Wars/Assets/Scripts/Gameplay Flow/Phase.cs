@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class Phase : MonoBehaviour
 {
-    public Grid grid;
+    public TileGrid grid;
 
     public abstract event Action Completed;
     public abstract void Begin();

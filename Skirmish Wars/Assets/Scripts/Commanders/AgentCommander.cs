@@ -4,8 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class AgentCommander : Commander
+public sealed class AgentCommander : Commander
 {
+    public AgentCommander(byte teamID, TileGrid grid, CursorController controller)
+        : base(teamID, grid, controller)
+    {
+
+    }
+
+
     public float strategizeFrequency;
     public float strategizeError;
 

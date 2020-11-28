@@ -11,6 +11,12 @@ public enum Priority
 
 public class AICursorController : CursorController
 {
+    public AICursorController(TileGrid grid)
+        : base(grid)
+    {
+
+    }
+
     public float speed;
     public bool isClicked;
 
@@ -27,11 +33,6 @@ public class AICursorController : CursorController
     public void AddAction(CursorAction action, Priority priority)
     {
         throw new NotImplementedException();
-    }
-
-    protected override void Update()
-    {
-        
     }
 
 }

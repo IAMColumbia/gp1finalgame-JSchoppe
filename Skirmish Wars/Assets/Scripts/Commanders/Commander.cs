@@ -1,12 +1,26 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
-public class Commander : MonoBehaviour
+public abstract class Commander
 {
+
+    public Commander(byte teamID, TileGrid grid, CursorController controller)
+    {
+        this.teamID = teamID;
+        this.grid = grid;
+        this.controller = controller;
+        controller.Clicked += OnClick;
+        controller.Released += OnRelease;
+        controller.Drag += OnDrag;
+    }
+
+    public byte teamID;
+    public TileGrid grid;
+    public List<CombatUnit> units;
+    public CursorController controller;
+
     protected virtual void OnCommandPhaseBegin() { }
     protected virtual void OnCommandPhaseEnd() { }
 
@@ -22,7 +36,7 @@ public class Commander : MonoBehaviour
             List<TileActor> actors = grid.actors[gridPosition];
             foreach (TileActor actor in actors)
             {
-                if (actor.Team == team)
+                if (actor.TeamID == teamID)
                 {
                     targetedActor = actor;
                     actor.OnClick();
@@ -69,23 +83,4 @@ public class Commander : MonoBehaviour
         if (targetedActor != null)
             targetedActor.OnRelease(grid.WorldToGrid(location));
     }
-
-
-    protected virtual void Awake()
-    {
-        controller.Clicked += OnClick;
-        controller.Released += OnRelease;
-        controller.Drag += OnDrag;
-    }
-
-
-    private IEnumerator WhileDragging()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Team team;
-    public TileGrid grid;
-    public List<CombatUnit> units;
-    public CursorController controller;
 }

@@ -26,15 +26,28 @@ public sealed class CursorRenderer : MonoBehaviour
     #endregion
     #region Private Fields
     private int cursorActiveProperty;
-    #endregion
-    #region Initialization
-    private void Start()
-    {
-        Cursor.visible = false;
-        cursorActiveProperty = Animator.StringToHash("CursorActive");
-    }
+    private CursorController drivingController;
     #endregion
     #region Properties
+    /// <summary>
+    /// The cursor controller that drives this renderer.
+    /// </summary>
+    public CursorController DrivingController
+    {
+        set
+        {
+            // Unbind a previous driver.
+            if (drivingController != null)
+            {
+                drivingController.RenderStateChanged -= OnRenderStateChanged;
+                drivingController.LocationChanged -= OnLocationChanged;
+            }
+            // Bind to the new driving controller.
+            value.RenderStateChanged += OnRenderStateChanged;
+            value.LocationChanged += OnLocationChanged;
+            drivingController = value;
+        }
+    }
     /// <summary>
     /// Sets the visual state of this cursor.
     /// </summary>
@@ -93,6 +106,29 @@ public sealed class CursorRenderer : MonoBehaviour
     {
         get { return highlightSprite.transform.position; }
         set { highlightSprite.transform.position = value; }
+    }
+    #endregion
+    #region Initialization
+    private void Awake()
+    {
+        Cursor.visible = false;
+        cursorActiveProperty = Animator.StringToHash("CursorActive");
+    }
+    #endregion
+    #region State Change Listeners
+    private void OnLocationChanged(Vector2 worldLocation)
+    {
+        // Update cursor location.
+        Location = worldLocation;
+        // Update the highlighted tile location.
+        // Running through these two functions clamps
+        // to the nearest tile center.
+        TileLocation = drivingController.Grid.GridToWorld(
+            drivingController.Grid.WorldToGrid(worldLocation));
+    }
+    private void OnRenderStateChanged(RenderedCursorState newState)
+    {
+        RenderState = newState;
     }
     #endregion
 }

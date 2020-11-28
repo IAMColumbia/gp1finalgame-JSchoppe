@@ -5,6 +5,13 @@ using System.Text;
 
 public sealed class PlayerCommander : Commander
 {
+    public PlayerCommander(byte teamID, TileGrid grid, CursorController controller)
+        : base(teamID, grid, controller)
+    {
+
+    }
+
+
     private void Update()
     {
         

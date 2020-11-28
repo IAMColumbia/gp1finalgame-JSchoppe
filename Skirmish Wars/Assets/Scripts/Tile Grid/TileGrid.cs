@@ -2,39 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class TileGrid : MonoBehaviour
+public sealed class TileGrid
 {
-    [SerializeField] private int width = 5;
-    [SerializeField] private int height = 5;
-    [SerializeField] private float gridUnit = 1f;
-
-    private void OnValidate()
+    public TileGrid(Vector2Int size, float gridUnit, Vector2 worldTranslation)
     {
-        width.Clamp(1, int.MaxValue);
-        height.Clamp(1, int.MaxValue);
-        gridUnit.Clamp(0.1f, float.MaxValue);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.magenta;
-        // Draw the grid into the scene view for reference.
-        Vector3 offset = height * Vector3.up * gridUnit;
-        for (int x = 0; x <= width; x++)
-        {
-            Vector3 along = transform.position + Vector3.right * x * gridUnit;
-            Debug.DrawLine(along, along + offset);
-        }
-        offset = width * Vector3.right * gridUnit;
-        for (int y = 0; y <= height; y++)
-        {
-            Vector3 along = transform.position + Vector3.up * y * gridUnit;
-            Debug.DrawLine(along, along + offset);
-        }
-    }
-
-    private void Awake()
-    {
+        width = size.x;
+        height = size.y;
+        this.gridUnit = gridUnit;
+        this.worldTranslation = worldTranslation;
         // Initialize actor directory.
         actors = new Dictionary<Vector2Int, List<TileActor>>();
         for (int x = 0; x < width; x++)
@@ -44,25 +19,17 @@ public sealed class TileGrid : MonoBehaviour
         routeData = new RouteNodeData[width, height];
     }
 
-    public void ParseSceneUnitsOntoGrid()
-    {
-        foreach (CombatUnit unit in FindObjectsOfType<CombatUnit>())
-        {
-            Vector2Int location = WorldToGrid(unit.transform.position);
-            if (DoesTileExist(location))
-            {
-                actors[location].Add(unit);
-            }
-        }
-    }
-
+    private Vector2 worldTranslation;
+    private int width;
+    private int height;
+    private float gridUnit;
 
     public Vector2Int WorldToGrid(Vector2 worldLocation)
     {
         return new Vector2Int
         {
-            x = (int)(worldLocation.x - transform.position.x / gridUnit),
-            y = (int)(worldLocation.y - transform.position.y / gridUnit)
+            x = (int)(worldLocation.x - worldTranslation.x / gridUnit),
+            y = (int)(worldLocation.y - worldTranslation.y / gridUnit)
         };
     }
 
@@ -78,8 +45,8 @@ public sealed class TileGrid : MonoBehaviour
     {
         return new Vector2
         {
-            x = transform.position.x + (gridLocation.x + 0.5f) * gridUnit,
-            y = transform.position.y + (gridLocation.y + 0.5f) * gridUnit
+            x = worldTranslation.x + (gridLocation.x + 0.5f) * gridUnit,
+            y = worldTranslation.y + (gridLocation.y + 0.5f) * gridUnit
         };
     }
     public Vector2[] GridToWorld(IList<Vector2Int> gridLocations)
