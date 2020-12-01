@@ -3,7 +3,7 @@
 [Serializable]
 public struct DamageTableEntry
 {
-    public UnitType unitA;
-    public UnitType unitB;
+    public UnitType attackingUnit;
+    public UnitType defendingUnit;
     public float baseDamage;
 }

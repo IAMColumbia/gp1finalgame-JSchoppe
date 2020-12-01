@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 using SkirmishWars.UnityEditor;
 
-public sealed class PlayerCursorTest : MonoBehaviour
+namespace SkirmishWars.Tests
 {
-    [SerializeField] private TileGridInstance gridInstance = null;
-
-    private void Start()
+    public sealed class PlayerCursorTest : MonoBehaviour
     {
-        TileGrid grid = gridInstance.GetInstance();
+        [SerializeField] private TileGridInstance gridInstance = null;
 
-        IDesignerParser parser = new UnitySceneParser();
+        private void Start()
+        {
+            TileGrid grid = gridInstance.GetInstance();
 
-        parser.GetAllPreplacedActors(grid);
+            IDesignerParser parser = new UnitySceneParser();
 
-        parser.GetAllPreplacedCommanders(grid);
+            parser.GetAllPreplacedActors(grid);
 
+            parser.GetAllPreplacedCommanders(grid);
+
+        }
     }
 }

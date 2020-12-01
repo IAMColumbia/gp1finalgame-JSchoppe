@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using UnityEngine; // Only used for common clamp function.
 
 /// <summary>
 /// Provides extension methods for the float data type.

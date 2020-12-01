@@ -12,7 +12,7 @@ public sealed class SpriteChainRenderer : MonoBehaviour
 
     private int chainLength;
 
-    private void Start()
+    private void Awake()
     {
         renderers = new List<SpriteRenderer>();
         chainLength = 0;
@@ -100,6 +100,9 @@ public sealed class SpriteChainRenderer : MonoBehaviour
                     i++;
                 }
             }
+            else
+                foreach (SpriteRenderer renderer in renderers)
+                    renderer.enabled = false;
         }
     }
 

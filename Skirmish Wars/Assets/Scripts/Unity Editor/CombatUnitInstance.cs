@@ -27,7 +27,7 @@ namespace SkirmishWars.UnityEditor
             // Snap this new unit onto the grid
             // and make the grid aware of them.
             newUnit.Location = grid.WorldToGrid(transform.position);
-            grid.actors[newUnit.Location].Add(newUnit);
+            grid.Actors.Add(newUnit);
             // If there is an assigned unit renderer,
             // link it to observe this instance.
             if (unitRenderer != null)

@@ -33,7 +33,7 @@ public abstract class Commander
         if (grid.DoesTileExist(gridPosition))
         {
             currentTile = gridPosition;
-            List<TileActor> actors = grid.actors[gridPosition];
+            List<TileActor> actors = grid.GetActorsOnTile(gridPosition);
             foreach (TileActor actor in actors)
             {
                 if (actor.TeamID == teamID)
