@@ -15,7 +15,7 @@ namespace SkirmishWars.UnityEditor
         #endregion
         #region Retrieval Method
         /// <summary>
-        /// Retrieves the unwrapped tilegrid from the scene.
+        /// Retrieves the unwrapped player commander from the scene.
         /// </summary>
         /// <returns>The tile grid instance (with no notion of monobehaviour).</returns>
         public PlayerCommander GetInstance(TileGrid grid)

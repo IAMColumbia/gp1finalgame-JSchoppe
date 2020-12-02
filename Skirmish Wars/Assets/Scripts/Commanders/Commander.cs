@@ -11,6 +11,7 @@ public abstract class Commander
         this.teamID = teamID;
         this.grid = grid;
         this.controller = controller;
+        controller.TeamID = teamID;
         controller.Clicked += OnClick;
         controller.Released += OnRelease;
         controller.Drag += OnDrag;

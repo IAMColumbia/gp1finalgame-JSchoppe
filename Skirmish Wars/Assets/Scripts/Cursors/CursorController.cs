@@ -1,5 +1,5 @@
 ﻿using System;
-using UnityEngine;
+using UnityEngine; // Only used for common Vector2 struct.
 
 /// <summary>
 /// Base class for cursor controllers.
@@ -15,6 +15,10 @@ public abstract class CursorController
     /// Called when the cursor location changes.
     /// </summary>
     public event Action<Vector2> LocationChanged;
+    /// <summary>
+    /// Called when the controlling commander's team changes.
+    /// </summary>
+    public event Action<Team> TeamChanged;
     #endregion
     #region Cursor Events
     /// <summary>
@@ -34,6 +38,7 @@ public abstract class CursorController
     protected TileGrid grid;
     private RenderedCursorState renderState;
     private Vector2 worldLocation;
+    private bool isDragging;
     #endregion
     #region Abstract Constructors
     /// <summary>
@@ -44,6 +49,7 @@ public abstract class CursorController
     {
         this.grid = grid;
         worldLocation = Vector2.zero;
+        isDragging = false;
         // Bind to subclass events so the drag
         // event can be handled on this level.
         Clicked += OnClick;
@@ -84,6 +90,17 @@ public abstract class CursorController
         }
     }
     /// <summary>
+    /// Updates the visual components of this cursor controller.
+    /// </summary>
+    public byte TeamID
+    {
+        set { TeamChanged?.Invoke(TeamsSingleton.FromID(value)); }
+    }
+    /// <summary>
+    /// Enables or disables the controller click-drag-release events.
+    /// </summary>
+    public abstract bool IsEnabled { get; set; }
+    /// <summary>
     /// The grid that this cursor controller is relative to.
     /// </summary>
     public TileGrid Grid { get { return grid; } }
@@ -93,15 +110,34 @@ public abstract class CursorController
     {
         RenderState = RenderedCursorState.Held;
         UpdateContext.Update += OnDragUpdate;
+        isDragging = true;
     }
     private void OnRelease(Vector2 location)
     {
         UpdateContext.Update -= OnDragUpdate;
         RenderState = RenderedCursorState.Active;
+        isDragging = false;
     }
     private void OnDragUpdate()
     {
         Drag?.Invoke(worldLocation);
+    }
+    #endregion
+    #region Interruption Implementation
+    /// <summary>
+    /// Interrupts the current controller action
+    /// and reverts it to its default state.
+    /// </summary>
+    protected virtual void InterruptController()
+    {
+        // Clear drag state.
+        if (isDragging)
+        {
+            UpdateContext.Update -= OnDragUpdate;
+            isDragging = false;
+        }
+        // Change the rendered cursor to ghost.
+        RenderState = RenderedCursorState.Ghost;
     }
     #endregion
 }

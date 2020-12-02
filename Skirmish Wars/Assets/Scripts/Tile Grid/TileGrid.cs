@@ -46,6 +46,10 @@ public sealed class TileGrid
     /// The commanders on this tile grid.
     /// </summary>
     public List<Commander> Commanders { get; private set; }
+    /// <summary>
+    /// The number of world units that equate to one grid tile.
+    /// </summary>
+    public float GridUnit { get { return gridUnit; } }
     #endregion
     #region World To Grid Conversion Methods
     /// <summary>

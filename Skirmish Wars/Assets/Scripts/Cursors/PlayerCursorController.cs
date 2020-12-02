@@ -9,7 +9,7 @@ using SkirmishWars.Unity;
 /// </summary>
 public sealed class PlayerCursorController : CursorController
 {
-    #region Events
+    #region Cursor Events
     /// <summary>
     /// Called when this controller clicks.
     /// Passes through the world space coordinates of the click.
@@ -24,6 +24,8 @@ public sealed class PlayerCursorController : CursorController
     #region Fields
     private MouseListener mouse;
     private Camera camera;
+    private bool inDrag;
+    private bool isEnabled;
     #endregion
     #region Constructors
     /// <summary>
@@ -45,17 +47,43 @@ public sealed class PlayerCursorController : CursorController
         mouse.Released += BubbleReleased;
     }
     #endregion
-    // TODO this seems like a jank way to do this.
-    #region Event Bubbling
+    #region Properties
+    /// <summary>
+    /// Enables or disables click events and current drag action.
+    /// </summary>
+    public override bool IsEnabled
+    {
+        get { return isEnabled; }
+        set
+        {
+            isEnabled = value;
+            if (!isEnabled && inDrag)
+            {
+                Released?.Invoke(camera.ScreenToWorldPoint(mouse.ScreenLocation));
+                InterruptController();
+                inDrag = false;
+            }
+        }
+    }
+    #endregion
+    #region Mouse Listeners
     private void BubbleClicked(Vector2 location)
     {
         // Convert from screen space to world space.
-        Clicked?.Invoke(camera.ScreenToWorldPoint(location));
+        if (IsEnabled)
+        {
+            inDrag = true;
+            Clicked?.Invoke(camera.ScreenToWorldPoint(location));
+        }
     }
     private void BubbleReleased(Vector2 location)
     {
         // Convert from screen space to world space.
-        Released?.Invoke(camera.ScreenToWorldPoint(location));
+        if (IsEnabled)
+        {
+            inDrag = false;
+            Released?.Invoke(camera.ScreenToWorldPoint(location));
+        }
     }
     #endregion
     #region Update Cursor Location
