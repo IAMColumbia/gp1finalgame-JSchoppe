@@ -13,10 +13,9 @@ namespace SkirmishWars.Tests
 
             IDesignerParser parser = new UnitySceneParser();
 
-            parser.GetAllPreplacedActors(grid);
+            grid.Actors.AddRange(parser.GetAllPreplacedActors(grid));
 
-            parser.GetAllPreplacedCommanders(grid);
-
+            grid.Commanders.AddRange(parser.GetAllPreplacedCommanders(grid));
         }
     }
 }

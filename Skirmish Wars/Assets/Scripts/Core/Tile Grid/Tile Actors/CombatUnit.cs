@@ -1,23 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 
+#region Exposed Enums
+/// <summary>
+/// Defines how terrain rules apply to a unit.
+/// </summary>
+public enum UnitMovement : byte
+{
+    Walking, Wheels, Flight
+}
+/// <summary>
+/// Defines how damage tables apply to units.
+/// </summary>
+public enum UnitType : byte
+{
+    FootSoldier
+}
+#endregion
+#region Exposed Structs/Classes
 [Serializable]
 public class CombatUnitState
 {
     [Range(0.1f, 1.0f)] public float hitPoints;
     [Range(1, 100)] public int moveRange;
     public UnitMovement movement;
-
+    #region Constructors
     public CombatUnitState()
     {
         hitPoints = 1f;
         moveRange = 5;
         movement = UnitMovement.Walking;
     }
+    #endregion
 }
+#endregion
 
 public class CombatUnit : TileActor
 {

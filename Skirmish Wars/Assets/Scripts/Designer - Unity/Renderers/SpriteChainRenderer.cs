@@ -1,10 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
 // TODO holy **** this is crappy.
 // Refactor this for the love of god please.
+[Serializable]
+public struct ChainSpriteSet
+{
+    public Sprite start;
+    public Sprite end;
+    public Sprite straight;
+    public Sprite left;
+    public Sprite right;
+}
+
 
 namespace SkirmishWars.UnityRenderers
 {

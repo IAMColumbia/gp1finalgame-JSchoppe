@@ -4,7 +4,7 @@ using SkirmishWars.UnityEditor;
 
 namespace SkirmishWars.Tests
 {
-    public sealed class CombatPhaseTest : MonoBehaviour
+    public sealed class AttackPhaseTest : MonoBehaviour
     {
         private enum TestType : byte
         {

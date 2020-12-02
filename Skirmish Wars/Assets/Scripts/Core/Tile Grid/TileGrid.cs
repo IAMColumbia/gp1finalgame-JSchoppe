@@ -27,8 +27,9 @@ public sealed class TileGrid
         height = size.y;
         this.gridUnit = gridUnit;
         this.worldTranslation = worldTranslation;
-        // Initialize actor directory.
+        // Initialize actor and commander directorys.
         Actors = new List<TileActor>();
+        Commanders = new List<Commander>();
         // Initialize A* collection.
         routeData = new RouteNodeData[width, height];
     }

@@ -54,6 +54,8 @@ public abstract class CursorController
         // event can be handled on this level.
         Clicked += OnClick;
         Released += OnRelease;
+        // Set enabled by default.
+        IsEnabled = true;
     }
     #endregion
     #region Properties

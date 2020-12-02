@@ -5,6 +5,16 @@ using System.Collections.Generic;
 // a quick google search but kind of jank. Don't
 // need it right now.
 
+#region Exposed Structs
+[Serializable]
+public struct DamageTableEntry
+{
+    public UnitType attackingUnit;
+    public UnitType defendingUnit;
+    public float baseDamage;
+}
+#endregion
+
 /// <summary>
 /// Damage table for unit types.
 /// </summary>
