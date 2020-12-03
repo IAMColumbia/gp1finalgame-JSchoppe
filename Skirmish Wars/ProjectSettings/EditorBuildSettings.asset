@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Test Scenes/Phase Cycle Test.unity
+    guid: b1418ee0d11560e47b949dd1f566bf5d
   m_configObjects: {}
