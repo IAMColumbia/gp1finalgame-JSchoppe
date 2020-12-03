@@ -210,7 +210,7 @@ public sealed class TileGrid
             // Return the path if the end has been found.	
             if (current == end)
             {
-                path = UnwindPath(current);
+                path = UnwindPath(current, maxMoves);
                 return true;
             }
             // Step into the current node by removing it.
@@ -288,7 +288,7 @@ public sealed class TileGrid
         // TODO this needs to consider terrain here!
         return 1;
     }
-    private Vector2Int[] UnwindPath(Vector2Int node)
+    private Vector2Int[] UnwindPath(Vector2Int node, int maxMoves)
     {
         // Unwind the path using the parent field.
         Stack<Vector2Int> path = new Stack<Vector2Int>();
@@ -301,8 +301,11 @@ public sealed class TileGrid
         }
         // Once exited remove the starting node.
         path.Pop();
-        // Return the path in the correct order.	
-        return path.ToArray();
+        // Return the path in the correct order
+        // and limited by the movement range.
+        Vector2Int[] outPath = path.ToArray();
+        Array.Resize(ref outPath, Mathf.Min(outPath.Length, maxMoves));
+        return outPath;
     }
     #endregion
     #endregion

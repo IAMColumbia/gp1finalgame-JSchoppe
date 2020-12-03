@@ -78,7 +78,7 @@ public abstract class CursorController
     /// <summary>
     /// The visual state of the rendered cursor.
     /// </summary>
-    protected RenderedCursorState RenderState
+    public RenderedCursorState RenderState
     {
         get { return renderState; }
         set

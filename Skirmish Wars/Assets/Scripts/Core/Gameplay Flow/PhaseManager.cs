@@ -1,19 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
+
 public sealed class PhaseManager : MonoBehaviour
 {
-    public Phase[] mapPhases;
+    [SerializeField] private Phase[] mapPhases = null;
 
-    private void Start()
+    public event Action CycleExited;
+
+    private int phase;
+
+    public void StartCycle(TileGrid grid)
     {
-        
+        foreach (Phase phase in mapPhases)
+            phase.grid = grid;
+        phase = 0;
+        mapPhases[0].Completed += OnPhaseComplete;
+        mapPhases[0].Begin();
     }
 
     private void OnPhaseComplete()
     {
-
+        mapPhases[phase].Completed -= OnPhaseComplete;
+        phase++;
+        if (phase > mapPhases.Length - 1)
+            phase = 0;
+        mapPhases[phase].Completed += OnPhaseComplete;
+        mapPhases[phase].Begin();
     }
 }

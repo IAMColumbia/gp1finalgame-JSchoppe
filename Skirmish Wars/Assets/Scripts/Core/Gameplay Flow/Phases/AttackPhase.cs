@@ -20,6 +20,12 @@ public sealed class AttackPhase : Phase
     /// </summary>
     public event Action<float> MovementAnimating;
 
+    private void Awake()
+    {
+        // TODO remove this it is jank!
+        // Should be passed via constructor.
+        damageTable = new UnitySceneParser().GetFirstDamageTable();
+    }
 
     private sealed class UnitAnimationState
     {

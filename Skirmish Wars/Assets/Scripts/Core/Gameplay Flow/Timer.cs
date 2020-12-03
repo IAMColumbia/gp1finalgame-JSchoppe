@@ -84,7 +84,7 @@ public sealed class Timer
             isRunning = true;
             UpdateContext.Update += Update;
         }
-        Started();
+        Started?.Invoke();
     }
     /// <summary>
     /// Pauses the timer if it is currently running.
@@ -123,7 +123,8 @@ public sealed class Timer
         // notify listeners and exit update loop.
         if (Interpolant == 1f)
         {
-            Elapsed();
+            Elapsed?.Invoke();
+            isRunning = false;
             UpdateContext.Update -= Update;
         }
     }

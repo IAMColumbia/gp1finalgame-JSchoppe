@@ -20,10 +20,14 @@ namespace SkirmishWars.UnityEditor
         /// <returns>The tile grid instance (with no notion of monobehaviour).</returns>
         public PlayerCommander GetInstance(TileGrid grid)
         {
+            // Create the new commander and add it to the grid.
+            PlayerCommander commander = 
+                new PlayerCommander(teamID, grid, controller.GetInstance(grid));
+            grid.Commanders.Add(commander);
             // Destroy this script's Monobehaviour baggage,
             // and return the lightweight instance.
             Destroy(this);
-            return new PlayerCommander(teamID, grid, controller.GetInstance(grid));
+            return commander;
         }
         #endregion
     }

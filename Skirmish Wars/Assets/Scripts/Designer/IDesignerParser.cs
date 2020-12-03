@@ -10,6 +10,11 @@ public interface IDesignerParser
     /// <returns>The tile grid with initialized properties.</returns>
     TileGrid GetFirstTileGrid();
     /// <summary>
+    /// Retrieves the first damage table from the designer.
+    /// </summary>
+    /// <returns>The initialized damage table.</returns>
+    DamageTable GetFirstDamageTable();
+    /// <summary>
     /// Retrieves all preplaced actors from the designer.
     /// </summary>
     /// <param name="onGrid">The grid context that actors will be added to.</param>

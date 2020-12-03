@@ -8,6 +8,11 @@ public abstract class Commander
 
     public Commander(byte teamID, TileGrid grid, CursorController controller)
     {
+        units = new List<CombatUnit>();
+        foreach (CombatUnit unit in grid.Actors)
+            if (unit.TeamID == teamID)
+                units.Add(unit);
+
         this.teamID = teamID;
         this.grid = grid;
         this.controller = controller;
@@ -22,8 +27,8 @@ public abstract class Commander
     public List<CombatUnit> units;
     public CursorController controller;
 
-    protected virtual void OnCommandPhaseBegin() { }
-    protected virtual void OnCommandPhaseEnd() { }
+    public virtual void OnCommandPhaseBegin() { }
+    public virtual void OnCommandPhaseEnd() { }
 
     private TileActor targetedActor;
     private Vector2Int currentTile;
