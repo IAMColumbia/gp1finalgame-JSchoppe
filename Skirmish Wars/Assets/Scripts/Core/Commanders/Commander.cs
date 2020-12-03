@@ -17,9 +17,9 @@ public abstract class Commander
         this.grid = grid;
         this.controller = controller;
         controller.TeamID = teamID;
-        controller.Clicked += OnClick;
-        controller.Released += OnRelease;
-        controller.Drag += OnDrag;
+        controller.PrimaryPressed += OnClick;
+        controller.PrimaryReleased += OnRelease;
+        controller.PrimaryDragging += OnDrag;
     }
 
     public byte teamID;

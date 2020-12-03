@@ -27,15 +27,25 @@ public sealed class AgentCursorController : CursorController
 {
     #region Cursor Events
     /// <summary>
-    /// Called when this agent clicks.
+    /// Called when this controller "clicks".
     /// Passes through the world space coordinates of the click.
     /// </summary>
-    public override event Action<Vector2> Clicked;
+    public override event Action<Vector2> PrimaryPressed;
     /// <summary>
-    /// Called when this agent releases.
+    /// Called when this controller releases a "click".
     /// Passes through the world space coordinates of the released click.
     /// </summary>
-    public override event Action<Vector2> Released;
+    public override event Action<Vector2> PrimaryReleased;
+    /// <summary>
+    /// Called when this controller "right clicks".
+    /// Passes through the world space coordinates of the click.
+    /// </summary>
+    public override event Action<Vector2> SecondaryPressed;
+    /// <summary>
+    /// Called when this controller releases a "right click".
+    /// Passes through the world space coordinates of the click.
+    /// </summary>
+    public override event Action<Vector2> SecondaryReleased;
     #endregion
     #region State Fields
     private List<CursorAction> actions;
@@ -94,7 +104,7 @@ public sealed class AgentCursorController : CursorController
                         // Break held pressed update cycle.
                         InterruptController();
                         // Release the cursor at its starting location.
-                        Released?.Invoke(currentAction.path[0]);
+                        PrimaryReleased?.Invoke(currentAction.path[0]);
                         break;
                 }
                 actions.Clear();
@@ -112,7 +122,7 @@ public sealed class AgentCursorController : CursorController
             if (currentAction.holdsClick)
             {
                 // Simulate mouse click.
-                Clicked?.Invoke(currentAction.path[0]);
+                PrimaryPressed?.Invoke(currentAction.path[0]);
                 // Update state (for interruptor method).
                 actionState = ActionState.DraggingTowardsEnd;
             }
@@ -133,7 +143,7 @@ public sealed class AgentCursorController : CursorController
             {
                 if (currentAction.holdsClick)
                     // Simulate mouse release.
-                    Released?.Invoke(currentAction.path[pathIndex]);
+                    PrimaryReleased?.Invoke(currentAction.path[pathIndex]);
                 // Change routine.
                 UpdateContext.Update -= OnUpdateAlong;
                 PullAction();

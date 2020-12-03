@@ -11,13 +11,21 @@ namespace SkirmishWars.Unity
     {
         #region Exposed Events
         /// <summary>
-        /// Called when this mouse listener registers a click.
+        /// Called when this mouse listener registers a click on LMB.
         /// </summary>
-        public event Action<Vector2> Clicked;
+        public event Action<Vector2> LeftClicked;
         /// <summary>
-        /// Called when this mouse listener registers a release.
+        /// Called when this mouse listener registers a release on LMB.
         /// </summary>
-        public event Action<Vector2> Released;
+        public event Action<Vector2> LeftReleased;
+        /// <summary>
+        /// Called when this mouse listener registers a click on RMB.
+        /// </summary>
+        public event Action<Vector2> RightClicked;
+        /// <summary>
+        /// Called when this mouse listener registers a release on RMB.
+        /// </summary>
+        public event Action<Vector2> RightReleased;
         #endregion
         #region Exposed Properties
         /// <summary>
@@ -32,11 +40,19 @@ namespace SkirmishWars.Unity
         }
         public void OnPrimaryMouseButtonAction(InputAction.CallbackContext context)
         {
-            // Listen for mouse button press and release.
+            // Listen for left mouse button press and release.
             if (context.ReadValueAsButton() && !context.performed)
-                Clicked?.Invoke(ScreenLocation);
+                LeftClicked?.Invoke(ScreenLocation);
             else if (!context.ReadValueAsButton())
-                Released?.Invoke(ScreenLocation);
+                LeftReleased?.Invoke(ScreenLocation);
+        }
+        public void OnSecondaryMouseButtonAction(InputAction.CallbackContext context)
+        {
+            // Listen for right mouse button press and release.
+            if (context.ReadValueAsButton() && !context.performed)
+                RightClicked?.Invoke(ScreenLocation);
+            else if (!context.ReadValueAsButton())
+                RightReleased?.Invoke(ScreenLocation);
         }
         #endregion
     }

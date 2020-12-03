@@ -11,15 +11,25 @@ public sealed class PlayerCursorController : CursorController
 {
     #region Cursor Events
     /// <summary>
-    /// Called when this controller clicks.
+    /// Called when this controller "clicks".
     /// Passes through the world space coordinates of the click.
     /// </summary>
-    public override event Action<Vector2> Clicked;
+    public override event Action<Vector2> PrimaryPressed;
     /// <summary>
-    /// Called when this controller releases.
+    /// Called when this controller releases a "click".
     /// Passes through the world space coordinates of the released click.
     /// </summary>
-    public override event Action<Vector2> Released;
+    public override event Action<Vector2> PrimaryReleased;
+    /// <summary>
+    /// Called when this controller "right clicks".
+    /// Passes through the world space coordinates of the click.
+    /// </summary>
+    public override event Action<Vector2> SecondaryPressed;
+    /// <summary>
+    /// Called when this controller releases a "right click".
+    /// Passes through the world space coordinates of the click.
+    /// </summary>
+    public override event Action<Vector2> SecondaryReleased;
     #endregion
     #region Fields
     private MouseListener mouse;
@@ -43,8 +53,10 @@ public sealed class PlayerCursorController : CursorController
         // Bubble events from the mouse listener.
         // TODO this setup seems not pog; maybe
         // a better way to route events here.
-        mouse.Clicked += BubbleClicked;
-        mouse.Released += BubbleReleased;
+        mouse.LeftClicked += ConvertPrimaryClicked;
+        mouse.LeftReleased += ConvertPrimaryReleased;
+        mouse.RightClicked += ConvertSecondaryClicked;
+        mouse.RightReleased += ConvertSecondaryReleased;
     }
     #endregion
     #region Properties
@@ -59,7 +71,7 @@ public sealed class PlayerCursorController : CursorController
             isEnabled = value;
             if (!isEnabled && inDrag)
             {
-                Released?.Invoke(camera.ScreenToWorldPoint(mouse.ScreenLocation));
+                PrimaryReleased?.Invoke(camera.ScreenToWorldPoint(mouse.ScreenLocation));
                 InterruptController();
                 inDrag = false;
             }
@@ -67,22 +79,40 @@ public sealed class PlayerCursorController : CursorController
     }
     #endregion
     #region Mouse Listeners
-    private void BubbleClicked(Vector2 location)
+    private void ConvertPrimaryClicked(Vector2 location)
     {
         // Convert from screen space to world space.
         if (IsEnabled)
         {
             inDrag = true;
-            Clicked?.Invoke(camera.ScreenToWorldPoint(location));
+            PrimaryPressed?.Invoke(camera.ScreenToWorldPoint(location));
         }
     }
-    private void BubbleReleased(Vector2 location)
+    private void ConvertPrimaryReleased(Vector2 location)
     {
         // Convert from screen space to world space.
         if (IsEnabled)
         {
             inDrag = false;
-            Released?.Invoke(camera.ScreenToWorldPoint(location));
+            PrimaryReleased?.Invoke(camera.ScreenToWorldPoint(location));
+        }
+    }
+    private void ConvertSecondaryClicked(Vector2 location)
+    {
+        // Convert from screen space to world space.
+        if (IsEnabled)
+        {
+            inDrag = true;
+            SecondaryPressed?.Invoke(camera.ScreenToWorldPoint(location));
+        }
+    }
+    private void ConvertSecondaryReleased(Vector2 location)
+    {
+        // Convert from screen space to world space.
+        if (IsEnabled)
+        {
+            inDrag = false;
+            SecondaryReleased?.Invoke(camera.ScreenToWorldPoint(location));
         }
     }
     #endregion

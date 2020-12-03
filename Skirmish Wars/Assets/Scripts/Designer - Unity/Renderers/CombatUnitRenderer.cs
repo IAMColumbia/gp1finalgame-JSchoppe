@@ -90,6 +90,7 @@ namespace SkirmishWars.UnityRenderers
             dispatcher.Teleported += OnTeleported;
             dispatcher.MovementAnimating += OnMovementAnimating;
             dispatcher.HitPointsChanged += OnHitPointsChanged;
+            dispatcher.PathShownChanged += OnPathShownChanged;
         }
         private void RemoveListeners(CombatUnit dispatcher)
         {
@@ -98,6 +99,7 @@ namespace SkirmishWars.UnityRenderers
             dispatcher.Teleported -= OnTeleported;
             dispatcher.MovementAnimating -= OnMovementAnimating;
             dispatcher.HitPointsChanged -= OnHitPointsChanged;
+            dispatcher.PathShownChanged -= OnPathShownChanged;
         }
         #endregion
         #region Observer Listeners
@@ -147,6 +149,11 @@ namespace SkirmishWars.UnityRenderers
             // units path.
             unitSprite.transform.position = 
                 Vector2.Lerp(worldPath[0], worldPath[1], interpolant);
+        }
+        private void OnPathShownChanged(bool isShown)
+        {
+            // Hide all of the path in this renderer.
+            movementChain.IsVisible = isShown;
         }
         #endregion
     }

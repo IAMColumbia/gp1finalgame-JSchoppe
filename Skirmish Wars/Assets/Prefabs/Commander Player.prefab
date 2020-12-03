@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1066859955828424759}
   - component: {fileID: 1066859955828424752}
   m_Layer: 0
-  m_Name: Player Commander
+  m_Name: Commander Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,6 +135,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3ad7e5d1-c13b-4f49-8fdd-8a4543637b9c
     m_ActionName: Stage Gameplay/Primary Mouse Button[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1066859955828424759}
+        m_MethodName: OnSecondaryMouseButtonAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bdfdb7c9-47f3-4942-abc8-eff2172a3625
+    m_ActionName: Stage Gameplay/Spy[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Stage Gameplay

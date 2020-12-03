@@ -24,21 +24,30 @@ public abstract class CursorController
     /// <summary>
     /// Called when this cursor clicks.
     /// </summary>
-    public abstract event Action<Vector2> Clicked;
+    public abstract event Action<Vector2> PrimaryPressed;
     /// <summary>
     /// Called when this cursor releases.
     /// </summary>
-    public abstract event Action<Vector2> Released;
+    public abstract event Action<Vector2> PrimaryReleased;
+    /// <summary>
+    /// Called when this cursor clicks.
+    /// </summary>
+    public abstract event Action<Vector2> SecondaryPressed;
+    /// <summary>
+    /// Called when this cursor releases.
+    /// </summary>
+    public abstract event Action<Vector2> SecondaryReleased;
     /// <summary>
     /// Called every update cycle while the controller is dragging.
     /// </summary>
-    public event Action<Vector2> Drag;
+    public event Action<Vector2> PrimaryDragging;
     #endregion
     #region Common Fields
     protected TileGrid grid;
     private RenderedCursorState renderState;
     private Vector2 worldLocation;
     private bool isDragging;
+    private bool isSecondaryDragging;
     #endregion
     #region Abstract Constructors
     /// <summary>
@@ -52,8 +61,10 @@ public abstract class CursorController
         isDragging = false;
         // Bind to subclass events so the drag
         // event can be handled on this level.
-        Clicked += OnClick;
-        Released += OnRelease;
+        PrimaryPressed += OnPrimaryClicked;
+        PrimaryReleased += OnPrimaryReleased;
+        SecondaryPressed += OnSecondaryClicked;
+        SecondaryReleased += OnSecondaryReleased;
         // Set enabled by default.
         IsEnabled = true;
     }
@@ -107,22 +118,36 @@ public abstract class CursorController
     /// </summary>
     public TileGrid Grid { get { return grid; } }
     #endregion
-    #region Drag Implementation
-    private void OnClick(Vector2 location)
+    #region Primary Button Implementation
+    private void OnPrimaryClicked(Vector2 location)
     {
-        RenderState = RenderedCursorState.Held;
-        UpdateContext.Update += OnDragUpdate;
+        if (!isSecondaryDragging)
+            RenderState = RenderedCursorState.Held;
+        UpdateContext.Update += OnPrimaryDragging;
         isDragging = true;
     }
-    private void OnRelease(Vector2 location)
+    private void OnPrimaryReleased(Vector2 location)
     {
-        UpdateContext.Update -= OnDragUpdate;
-        RenderState = RenderedCursorState.Active;
+        if (!isSecondaryDragging)
+            RenderState = RenderedCursorState.Active;
+        UpdateContext.Update -= OnPrimaryDragging;
         isDragging = false;
     }
-    private void OnDragUpdate()
+    private void OnPrimaryDragging()
     {
-        Drag?.Invoke(worldLocation);
+        PrimaryDragging?.Invoke(worldLocation);
+    }
+    #endregion
+    #region Secondary Button Implementation
+    private void OnSecondaryClicked(Vector2 location)
+    {
+        isSecondaryDragging = true;
+        RenderState = RenderedCursorState.Ghost;
+    }
+    private void OnSecondaryReleased(Vector2 location)
+    {
+        isSecondaryDragging = false;
+        RenderState = RenderedCursorState.Active;
     }
     #endregion
     #region Interruption Implementation
@@ -135,7 +160,7 @@ public abstract class CursorController
         // Clear drag state.
         if (isDragging)
         {
-            UpdateContext.Update -= OnDragUpdate;
+            UpdateContext.Update -= OnPrimaryDragging;
             isDragging = false;
         }
         // Change the rendered cursor to ghost.

@@ -6,9 +6,17 @@
             "id": "c71ff5a8-585c-4116-8bb6-bf24bdb58679",
             "actions": [
                 {
-                    "name": "Primary Mouse Button",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "3ad7e5d1-c13b-4f49-8fdd-8a4543637b9c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Spy",
+                    "type": "Button",
+                    "id": "bdfdb7c9-47f3-4942-abc8-eff2172a3625",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -22,7 +30,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Primary Mouse Button",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fbaa3f7a-f561-4597-8c7c-5e9132662e46",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spy",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

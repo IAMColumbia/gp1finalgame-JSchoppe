@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-// TODO holy **** this is crappy.
-// Refactor this for the love of god please.
 [Serializable]
 public struct ChainSpriteSet
 {
@@ -16,7 +14,8 @@ public struct ChainSpriteSet
     public Sprite right;
 }
 
-
+// TODO holy **** this is crappy.
+// Refactor this for the love of god please.
 namespace SkirmishWars.UnityRenderers
 {
     /// <summary>
@@ -31,6 +30,8 @@ namespace SkirmishWars.UnityRenderers
 
         private int chainLength;
 
+        private bool isVisible;
+
         private void OnDestroy()
         {
             // TODO may want to use object pooling here.
@@ -40,6 +41,8 @@ namespace SkirmishWars.UnityRenderers
 
         private void Awake()
         {
+            // Initially the path will always display.
+            IsVisible = true;
             renderers = new List<SpriteRenderer>();
             chainLength = 0;
         }
@@ -60,7 +63,7 @@ namespace SkirmishWars.UnityRenderers
                     int i;
                     for (i = 0; i < chainLength; i++)
                     {
-                        renderers[i].enabled = true;
+                        renderers[i].enabled = isVisible;
                         renderers[i].transform.position = value[i];
                     }
                     for (i = 0; i < chainLength; i++)
@@ -154,8 +157,10 @@ namespace SkirmishWars.UnityRenderers
 
         public bool IsVisible
         {
+            get { return isVisible; }
             set
             {
+                isVisible = value;
                 for (int i = 0; i < chainLength; i++)
                     renderers[i].enabled = value;
             }

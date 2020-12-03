@@ -22,12 +22,12 @@ public sealed class UnitySceneParser : IDesignerParser
     public Commander[] GetAllPreplacedCommanders(TileGrid onGrid)
     {
         List<Commander> foundCommanders = new List<Commander>();
-        foreach (PlayerCommanderInstance playerCommander in
-            Object.FindObjectsOfType<PlayerCommanderInstance>())
-            foundCommanders.Add(playerCommander.GetInstance(onGrid));
         foreach (AgentCommanderInstance agentCommander in
             Object.FindObjectsOfType<AgentCommanderInstance>())
             foundCommanders.Add(agentCommander.GetInstance(onGrid));
+        foreach (PlayerCommanderInstance playerCommander in
+            Object.FindObjectsOfType<PlayerCommanderInstance>())
+            foundCommanders.Add(playerCommander.GetInstance(onGrid));
         return foundCommanders.ToArray();
     }
 

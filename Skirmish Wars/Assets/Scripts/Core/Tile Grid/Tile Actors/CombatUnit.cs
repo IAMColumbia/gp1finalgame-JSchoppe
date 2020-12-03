@@ -63,12 +63,22 @@ public class CombatUnit : TileActor
         }
     }
 
+    public bool PathShown
+    {
+        set
+        {
+            PathShownChanged?.Invoke(value);
+        }
+    }
+
 
     public event Action<Vector2Int[]> PathChanged;
 
     public event Action<float> MovementAnimating;
 
     public event Action<float> HitPointsChanged;
+
+    public event Action<bool> PathShownChanged;
 
     public void AnimateMovement(float interpolant)
     {
