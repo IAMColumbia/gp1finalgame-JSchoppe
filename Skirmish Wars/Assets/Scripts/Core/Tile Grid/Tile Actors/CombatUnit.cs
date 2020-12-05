@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 #region Exposed Enums
-/// <summary>
-/// Defines how terrain rules apply to a unit.
-/// </summary>
-public enum UnitMovement : byte
-{
-    Walking, Wheels, Flight
-}
 /// <summary>
 /// Defines how damage tables apply to units.
 /// </summary>
@@ -25,14 +18,12 @@ public class CombatUnitState
 {
     [Range(0.1f, 1.0f)] public float hitPoints;
     [Range(1, 100)] public int moveRange;
-    public UnitMovement movement;
     public UnitType type;
     #region Constructors
     public CombatUnitState()
     {
         hitPoints = 1f;
         moveRange = 5;
-        movement = UnitMovement.Walking;
     }
     #endregion
 }
@@ -46,14 +37,12 @@ public class CombatUnit : TileActor
     {
         hitPoints = initialState.hitPoints;
         moveRange = initialState.moveRange;
-        movement = initialState.movement;
         type = initialState.type;
         movePath = new LinkedList<Vector2Int>();
     }
 
     public float hitPoints;
     public int moveRange;
-    public UnitMovement movement;
     public UnitType type;
 
     public float HitPoints
@@ -74,6 +63,12 @@ public class CombatUnit : TileActor
         }
     }
 
+    // TODO this is a hotfix (subverts structure).
+    public event Action<bool> FocusChanged;
+    public bool HasFocus
+    {
+        set { FocusChanged?.Invoke(value); }
+    }
 
     public event Action<Vector2Int[]> PathChanged;
 
@@ -88,9 +83,17 @@ public class CombatUnit : TileActor
         MovementAnimating?.Invoke(interpolant);
     }
 
+    public Vector2Int[] PossibleDestinations { get; private set; }
+
+    public void RefreshMoveOptions()
+    {
+        PossibleDestinations = 
+            grid.CalculateMoveOptions(Location, type, moveRange);
+    }
 
     public override void OnClick()
     {
+        base.OnClick();
         movePath = new LinkedList<Vector2Int>();
         movePath.AddLast(location);
         PathChanged?.Invoke(movePath.ToArray());

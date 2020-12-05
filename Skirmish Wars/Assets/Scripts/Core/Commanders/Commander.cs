@@ -27,10 +27,14 @@ public abstract class Commander
     public List<CombatUnit> units;
     public CursorController controller;
 
-    public virtual void OnCommandPhaseBegin() { }
+    public virtual void OnCommandPhaseBegin()
+    {
+        foreach (CombatUnit unit in units)
+            unit.RefreshMoveOptions();
+    }
     public virtual void OnCommandPhaseEnd() { }
 
-    private TileActor targetedActor;
+    protected TileActor targetedActor;
     private Vector2Int currentTile;
     protected virtual void OnClick(Vector2 location)
     {
@@ -45,7 +49,7 @@ public abstract class Commander
                 if (actor.TeamID == teamID)
                 {
                     targetedActor = actor;
-                    actor.OnClick();
+                    targetedActor.OnClick();
                     break;
                 }
             }

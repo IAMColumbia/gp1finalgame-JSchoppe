@@ -42,6 +42,8 @@ namespace SkirmishWars.UnityRenderers
     }
     #endregion
 
+    // TODO this class is getting fat, maybe abstract some parts.
+
     /// <summary>
     /// Implements a combat unit renderer that
     /// observes a combat unit instance.
@@ -61,6 +63,17 @@ namespace SkirmishWars.UnityRenderers
         #region State Fields
         private Vector2[] worldPath;
         private CombatUnit drivingUnit;
+        private TileIndicatorPool tileIndicatorPool;
+        #endregion
+        #region Initialization
+        private void Awake()
+        {
+            // TODO figure out a better way to manage
+            // the singleton here.
+            tileIndicatorPool = FindObjectOfType<TileIndicatorPool>();
+            if (tileIndicatorPool == null)
+                throw new Exception("A tile indicator pool must be present in the scene.");
+        }
         #endregion
         #region Observer Implementation
         /// <summary>
@@ -91,6 +104,7 @@ namespace SkirmishWars.UnityRenderers
             dispatcher.MovementAnimating += OnMovementAnimating;
             dispatcher.HitPointsChanged += OnHitPointsChanged;
             dispatcher.PathShownChanged += OnPathShownChanged;
+            dispatcher.FocusChanged += OnFocusChanged;
         }
         private void RemoveListeners(CombatUnit dispatcher)
         {
@@ -100,6 +114,7 @@ namespace SkirmishWars.UnityRenderers
             dispatcher.MovementAnimating -= OnMovementAnimating;
             dispatcher.HitPointsChanged -= OnHitPointsChanged;
             dispatcher.PathShownChanged -= OnPathShownChanged;
+            dispatcher.FocusChanged -= OnFocusChanged;
         }
         #endregion
         #region Observer Listeners
@@ -154,6 +169,15 @@ namespace SkirmishWars.UnityRenderers
         {
             // Hide all of the path in this renderer.
             movementChain.IsVisible = isShown;
+        }
+        private void OnFocusChanged(bool hasFocus)
+        {
+            // TODO this will cause collisions if multiple
+            // units need to post to the indicator pool.
+            if (hasFocus)
+                tileIndicatorPool.SetIndicators(drivingUnit.PossibleDestinations, drivingUnit.Grid);
+            else
+                tileIndicatorPool.ClearIndicators();
         }
         #endregion
     }

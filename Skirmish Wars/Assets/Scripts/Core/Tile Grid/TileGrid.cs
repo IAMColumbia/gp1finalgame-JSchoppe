@@ -145,13 +145,68 @@ public sealed class TileGrid
     /// Determines all tiles that can be reached with the given move range.
     /// </summary>
     /// <param name="start">The starting tile coordinates.</param>
-    /// <param name="mode">The terrain movement mode.</param>
-    /// <param name="distance">The number of movement points available.</param>
+    /// <param name="type">The type of unit moving.</param>
+    /// <param name="movePoints">The number of movement points available.</param>
     /// <returns>An array of all possible tile coordinates that can be reached.</returns>
-    public Vector2Int[] CalculateMoveOptions(Vector2Int start, UnitMovement mode, int distance)
+    public Vector2Int[] CalculateMoveOptions(Vector2Int start, UnitType type, int movePoints)
     {
-        // TODO implement this so the AI can be not dumb.
-        throw new NotImplementedException();
+        // Set up a record of move points remaining
+        // when making it to each grid tile.
+        int[,] movePointsLeft = new int[width, height];
+        for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
+                movePointsLeft[x, y] = -1;
+        // Initialize the start tile with full move points
+        // and recursively explore movement options until
+        // all possible routes are exhausted.
+        movePointsLeft[start.x, start.y] = movePoints;
+        ExploreRecursive(start);
+        // Once the recursion finishes, scan the array
+        // for all tiles that can be traveled to.
+        List<Vector2Int> foundOptions = new List<Vector2Int>();
+        for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
+                if (movePointsLeft[x, y] >= 0)
+                    foundOptions.Add(new Vector2Int(x, y));
+        return foundOptions.ToArray();
+
+        // TODO this might not be the most efficient way to do this.
+        // This solution is depth first which will result in a lot
+        // of redundant branch checks. Make this breadth first.
+        void ExploreRecursive(Vector2Int fromTile)
+        {
+            // Get the current state of movement.
+            int pointsLeft =
+                movePointsLeft[fromTile.x, fromTile.y];
+            // Declare variables for checking branches.
+            Vector2Int toTile;
+            UnitTerrainData terrain;
+            int pointsAfterMove;
+            // Check each possible branch.
+            foreach (Vector2Int direction in routeDirections)
+            {
+                // Check to ensure movement validity.
+                toTile = fromTile + direction;
+                if (DoesTileExist(toTile))
+                {
+                    terrain = Terrain[toTile][type];
+                    if (terrain.canTraverse)
+                    {
+                        // Is this move possible and better
+                        // than a previous recursion branch was
+                        // able to accomplish?
+                        pointsAfterMove = pointsLeft - terrain.moveCost;
+                        if (pointsAfterMove >= 0
+                            && pointsAfterMove > movePointsLeft[toTile.x, toTile.y])
+                        {
+                            // If so, then continue exploring this branch.
+                            movePointsLeft[toTile.x, toTile.y] = pointsAfterMove;
+                            ExploreRecursive(toTile);
+                        }
+                    }
+                }
+            }
+        }
     }
     // TODO maybe this should be abstracted
     // and maybe only have heuristic/move-cost

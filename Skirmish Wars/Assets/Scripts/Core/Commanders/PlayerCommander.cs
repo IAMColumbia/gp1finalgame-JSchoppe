@@ -23,6 +23,25 @@ public sealed class PlayerCommander : Commander
         IsSpying = false;
     }
 
+    protected override void OnClick(Vector2 location)
+    {
+        base.OnClick(location);
+        // TODO this is a hotfix.
+        // This state should not be managed here.
+        if (targetedActor != null
+            && targetedActor is CombatUnit unit)
+            unit.HasFocus = true;
+    }
+    protected override void OnRelease(Vector2 location)
+    {
+        base.OnRelease(location);
+        // TODO this is a hotfix.
+        // This state should not be managed here.
+        if (targetedActor != null
+            && targetedActor is CombatUnit unit)
+            unit.HasFocus = false;
+    }
+
     private bool IsSpying
     {
         set
