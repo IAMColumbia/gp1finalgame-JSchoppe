@@ -26,6 +26,7 @@ public class CombatUnitState
     [Range(0.1f, 1.0f)] public float hitPoints;
     [Range(1, 100)] public int moveRange;
     public UnitMovement movement;
+    public UnitType type;
     #region Constructors
     public CombatUnitState()
     {
@@ -46,12 +47,14 @@ public class CombatUnit : TileActor
         hitPoints = initialState.hitPoints;
         moveRange = initialState.moveRange;
         movement = initialState.movement;
+        type = initialState.type;
         movePath = new LinkedList<Vector2Int>();
     }
 
     public float hitPoints;
     public int moveRange;
     public UnitMovement movement;
+    public UnitType type;
 
     public float HitPoints
     {
@@ -95,22 +98,74 @@ public class CombatUnit : TileActor
 
     public override void OnDragNewTile(Vector2Int newTile)
     {
-        base.OnDragNewTile(newTile);
+        // TODO this whole method seems inneficient and
+        // could probably be rethought through.
 
-        bool intersectsOldPath = false;
-        foreach (Vector2Int tile in movePath)
+        base.OnDragNewTile(newTile);
+        int remainingMoves = CalculateRemainingMoves();
+
+        // Check to see if the next tile can
+        // be moved on by this unit type.
+        UnitTerrainData terrain = grid.Terrain[newTile][type];
+        if (terrain.canTraverse)
         {
-            if (newTile == tile)
+            // Use A* to infer the path to the new tile.
+            // This step is required if the player drags through
+            // non-navigable terrain; it will infer the path
+            // around the terrain.
+            if (grid.TryFindPath(movePath.Last.Value, newTile, type, remainingMoves,
+                out Vector2Int[] addedPath))
             {
-                movePath.Truncate(tile);
-                intersectsOldPath = true;
-                break;
+                // Add the inferred path until there is not
+                // enough remaining movement.
+                foreach (Vector2Int tile in addedPath)
+                {
+                    remainingMoves -= grid.Terrain[tile][type].moveCost;
+                    if (remainingMoves >= 0)
+                        CheckIntersectionAndJoin(tile);
+                }
             }
         }
-        if (!intersectsOldPath && movePath.Count <= moveRange)
-            movePath.AddLast(newTile);
-
         PathChanged?.Invoke(movePath.ToArray());
+
+        void CheckIntersectionAndJoin(Vector2Int joinTile)
+        {
+            // Check to see if the path is self intersecting.
+            // This ensures that paths can't stack on themselves
+            // which would make the scene very hard to comprehend.
+            bool didIntersect = false;
+            if (joinTile == Location)
+            {
+                didIntersect = true;
+                movePath.Clear();
+            }
+            else
+            {
+                foreach (Vector2Int tile in movePath)
+                {
+                    if (joinTile == tile)
+                    {
+                        movePath.Truncate(tile);
+                        didIntersect = true;
+                        break;
+                    }
+                }
+            }
+            movePath.AddLast(joinTile);
+            if (didIntersect)
+                remainingMoves = CalculateRemainingMoves();
+        }
+        int CalculateRemainingMoves()
+        {
+            int movesLeft = moveRange;
+            LinkedListNode<Vector2Int> node = movePath.First;
+            while (node.Next != null)
+            {
+                node = node.Next;
+                movesLeft -= grid.Terrain[node.Value][type].moveCost;
+            }
+            return movesLeft;
+        }
     }
 
 

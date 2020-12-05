@@ -27,9 +27,13 @@ public sealed class TileGrid
         height = size.y;
         this.gridUnit = gridUnit;
         this.worldTranslation = worldTranslation;
-        // Initialize actor and commander directorys.
+        // Initialize collections.
         Actors = new List<TileActor>();
         Commanders = new List<Commander>();
+        Terrain = new Dictionary<Vector2Int, TileTerrain>();
+        for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+                Terrain.Add(new Vector2Int(x, y), default(TileTerrain));
         // Initialize A* collection.
         routeData = new RouteNodeData[width, height];
     }
@@ -158,14 +162,14 @@ public sealed class TileGrid
     /// </summary>
     /// <param name="start">The start point of the path.</param>
     /// <param name="end">The end point of the path.</param>
-    /// <param name="moveType">Defines how the route handles terrain.</param>
+    /// <param name="unitType">Defines how the route handles terrain.</param>
     /// <param name="path">
     /// The output for the found path.
     /// Starts at the first tile to move to.
     /// If the function returns false the attempted path is still returned.
     /// </param>
     /// <returns>True if a valid complete path was found.</returns>
-    public bool TryFindPath(Vector2Int start, Vector2Int end, UnitMovement moveType, int maxMoves, out Vector2Int[] path)
+    public bool TryFindPath(Vector2Int start, Vector2Int end, UnitType unitType, int maxMoves, out Vector2Int[] path)
     {
         #region Already At End Edge Case
         if (start == end)
@@ -220,12 +224,14 @@ public sealed class TileGrid
             foreach (Vector2Int direction in routeDirections)
             {
                 Vector2Int newTile = current + direction;
-                // TODO this also needs to hard check whether
-                // this tile is navigatable at all.
-                if (DoesTileExist(newTile) && !closedNodes.Contains(newTile))
+                // Check to see if this new tile is a valid option.
+                // If not, immediately move it to the closed list.
+                if (!DoesTileExist(newTile) || !Terrain[newTile][unitType].canTraverse)
+                    closedNodes.Add(newTile);
+                else if (!closedNodes.Contains(newTile))
                 {
                     float newGScore = routeData[current.x, current.y].gScore +
-                        CalculateMoveCost(newTile, moveType);
+                        CalculateMoveCost(newTile, unitType);
                     if (newGScore < routeData[newTile.x, newTile.y].gScore)
                     {
                         // If this is a new best path to this node,	
@@ -283,7 +289,7 @@ public sealed class TileGrid
         return Mathf.Abs(nodeA.x - nodeB.x)
             + Mathf.Abs(nodeA.y - nodeB.y);
     }
-    private float CalculateMoveCost(Vector2Int ontoTile, UnitMovement moveType)
+    private float CalculateMoveCost(Vector2Int ontoTile, UnitType unitType)
     {
         // TODO this needs to consider terrain here!
         return 1;

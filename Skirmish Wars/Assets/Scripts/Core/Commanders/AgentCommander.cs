@@ -55,7 +55,7 @@ public sealed class AgentCommander : Commander
             foreach (CombatUnit unit in units)
             {
                 CombatUnit targetUnit = targetCommander.units.RandomElement();
-                if (grid.TryFindPath(unit.Location, targetUnit.Location, unit.movement, unit.moveRange,
+                if (grid.TryFindPath(unit.Location, targetUnit.Location, unit.type, unit.moveRange,
                     out Vector2Int[] path))
                 {
                     Vector2Int[] fullPath = new Vector2Int[path.Length + 1];
