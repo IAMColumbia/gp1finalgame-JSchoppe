@@ -9,7 +9,8 @@ using UnityEngine;
 /// </summary>
 public enum UnitType : byte
 {
-    FootSoldier
+    FootSoldier,
+    Tank
 }
 #endregion
 #region Exposed Structs/Classes

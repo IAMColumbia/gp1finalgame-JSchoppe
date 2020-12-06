@@ -173,6 +173,11 @@ MonoBehaviour:
         canTraverse: 1
         moveCost: 1
         addedDefense: 0
+    - unitType: 1
+      interactionData:
+        canTraverse: 1
+        moveCost: 1
+        addedDefense: 0
   - whenSpriteUsed: {fileID: 21300000, guid: 35df59f07c446d241ad58b01bd3ee05a, type: 3}
     interactions:
     - unitType: 0
@@ -180,9 +185,19 @@ MonoBehaviour:
         canTraverse: 1
         moveCost: 1
         addedDefense: 0.3
+    - unitType: 1
+      interactionData:
+        canTraverse: 1
+        moveCost: 1
+        addedDefense: 0.3
   - whenSpriteUsed: {fileID: 21300000, guid: ef5e1a4d7b65aa84f8d04febf94b1e53, type: 3}
     interactions:
     - unitType: 0
+      interactionData:
+        canTraverse: 0
+        moveCost: 0
+        addedDefense: 0
+    - unitType: 1
       interactionData:
         canTraverse: 0
         moveCost: 0

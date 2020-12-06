@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
+// TODO abstract away from MonoBehaviour.
+
+/// <summary>
+/// Gameplay phase where units move and confront each other.
+/// </summary>
 public sealed class AttackPhase : Phase
 {
-    public float tilesPerSecond;
-    public float confrontationPauseSeconds;
+    [SerializeField] private float tilesPerSecond;
+    [SerializeField] private float confrontationPauseSeconds;
     public DamageTable damageTable;
 
     public override event Action Completed;
@@ -133,15 +135,14 @@ public sealed class AttackPhase : Phase
         }
 
         List<CombatUnit> removedUnits = new List<CombatUnit>();
-        foreach (List<CombatUnit> cluster in clusters.Values)
+        foreach (KeyValuePair<Vector2Int, List<CombatUnit>> cluster in clusters)
         {
-
             Dictionary<int, int> teamQuantities =
                 new Dictionary<int, int>();
             Dictionary<CombatUnit, float> dealtDamage =
                 new Dictionary<CombatUnit, float>();
 
-            foreach (CombatUnit unit in cluster)
+            foreach (CombatUnit unit in cluster.Value)
             {
                 dealtDamage.Add(unit, 0f);
                 if (teamQuantities.ContainsKey(unit.TeamID))
@@ -150,18 +151,20 @@ public sealed class AttackPhase : Phase
                     teamQuantities.Add(unit.TeamID, 1);
             }
 
-            foreach (CombatUnit unit in cluster)
+            foreach (CombatUnit unit in cluster.Value)
             {
-                float spreadFactor = 1f / (cluster.Count - teamQuantities[unit.TeamID]);
-                foreach (CombatUnit otherUnit in cluster)
+                float spreadFactor = 1f / (cluster.Value.Count - teamQuantities[unit.TeamID]);
+                foreach (CombatUnit otherUnit in cluster.Value)
                     if (otherUnit != unit && otherUnit.TeamID != unit.TeamID)
                         dealtDamage[otherUnit] += spreadFactor * unit.hitPoints *
-                            damageTable[UnitType.FootSoldier, UnitType.FootSoldier];
+                            damageTable[unit.type, otherUnit.type];
             }
 
-            foreach(CombatUnit unit in cluster)
+            foreach(CombatUnit unit in cluster.Value)
             {
-                unit.HitPoints -= dealtDamage[unit];
+                float defense =
+                    grid.Terrain[cluster.Key][unit.type].addedDefense;
+                unit.HitPoints -= dealtDamage[unit] * (1f - defense);
                 if (unit.HitPoints < 0f)
                     removedUnits.Add(unit);
             }
@@ -169,6 +172,12 @@ public sealed class AttackPhase : Phase
 
         foreach (CombatUnit removedUnit in removedUnits)
         {
+            // TODO this is cringe and would not scale.
+            // Make the accessor structure for commanders better.
+            foreach (Commander commander in grid.Commanders)
+                if (commander.teamID == removedUnit.TeamID)
+                    commander.units.Remove(removedUnit);
+
             grid.Actors.Remove(removedUnit);
             for (int i = 0; i < animationStates.Count; i++)
             {

@@ -46,4 +46,13 @@ MonoBehaviour:
   entries:
   - attackingUnit: 0
     defendingUnit: 0
-    baseDamage: 0.3
+    baseDamage: 0.4
+  - attackingUnit: 1
+    defendingUnit: 1
+    baseDamage: 0.6
+  - attackingUnit: 1
+    defendingUnit: 0
+    baseDamage: 0.7
+  - attackingUnit: 0
+    defendingUnit: 1
+    baseDamage: 0.1
