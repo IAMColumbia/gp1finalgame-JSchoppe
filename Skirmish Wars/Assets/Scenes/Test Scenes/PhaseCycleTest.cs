@@ -9,14 +9,17 @@ namespace SkirmishWars.Tests
         [SerializeField] private PhaseManager phaseManager = null;
 
         private TileGrid grid;
+        private DamageTable damageTable;
 
         private void Awake()
         {
             IDesignerParser parser = new UnitySceneParser();
             grid = parser.GetFirstTileGrid();
 
+            damageTable = parser.GetFirstDamageTable();
+
             parser.GetAllPreplacedActors(grid);
-            parser.GetAllPreplacedCommanders(grid);
+            parser.GetAllPreplacedCommanders(grid, damageTable);
 
             StartCoroutine(WaitInitThenStart());
         }

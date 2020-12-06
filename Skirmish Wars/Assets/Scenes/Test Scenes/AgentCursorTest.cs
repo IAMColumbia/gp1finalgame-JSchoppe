@@ -23,7 +23,7 @@ namespace SkirmishWars.Tests
             UnitySceneParser parser = new UnitySceneParser();
             grid.Actors.AddRange(parser.GetAllPreplacedActors(grid));
 
-            AgentCommander commander = agentCommanderInstance.GetInstance(grid);
+            AgentCommander commander = agentCommanderInstance.GetInstance(grid, default);
             AgentCursorController agentCursor = (AgentCursorController)commander.controller;
             agentCursor.IsEnabled = true;
             switch (test)

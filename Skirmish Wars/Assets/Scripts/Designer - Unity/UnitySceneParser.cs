@@ -19,12 +19,12 @@ public sealed class UnitySceneParser : IDesignerParser
         return foundActors.ToArray();
     }
 
-    public Commander[] GetAllPreplacedCommanders(TileGrid onGrid)
+    public Commander[] GetAllPreplacedCommanders(TileGrid onGrid, DamageTable damageTable)
     {
         List<Commander> foundCommanders = new List<Commander>();
         foreach (AgentCommanderInstance agentCommander in
             Object.FindObjectsOfType<AgentCommanderInstance>())
-            foundCommanders.Add(agentCommander.GetInstance(onGrid));
+            foundCommanders.Add(agentCommander.GetInstance(onGrid, damageTable));
         foreach (PlayerCommanderInstance playerCommander in
             Object.FindObjectsOfType<PlayerCommanderInstance>())
             foundCommanders.Add(playerCommander.GetInstance(onGrid));

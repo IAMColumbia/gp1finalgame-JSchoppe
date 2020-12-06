@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO add XML documentation and comments.
+
 public abstract class Commander
 {
-
     public Commander(byte teamID, TileGrid grid, CursorController controller)
     {
         units = new List<CombatUnit>();

@@ -15,7 +15,7 @@ namespace SkirmishWars.Tests
 
             grid.Actors.AddRange(parser.GetAllPreplacedActors(grid));
 
-            grid.Commanders.AddRange(parser.GetAllPreplacedCommanders(grid));
+            grid.Commanders.AddRange(parser.GetAllPreplacedCommanders(grid, default));
         }
     }
 }

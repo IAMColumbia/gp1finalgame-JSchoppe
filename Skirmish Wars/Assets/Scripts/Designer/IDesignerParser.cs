@@ -24,6 +24,7 @@ public interface IDesignerParser
     /// Retrieves all preplaced commanders from the designer.
     /// </summary>
     /// <param name="onGrid">The grid context that commanders will be added to.</param>
+    /// <param name="usingTable">The damage table that agent commanders will reference.</param>
     /// <returns>An array of all commanders with initialized properties.</returns>
-    Commander[] GetAllPreplacedCommanders(TileGrid onGrid);
+    Commander[] GetAllPreplacedCommanders(TileGrid onGrid, DamageTable usingTable);
 }

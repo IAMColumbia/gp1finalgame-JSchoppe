@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamID: 0
   controller: {fileID: 5332880594832099529}
+  thoughtTime: 1
 --- !u!114 &5332880594832099529
 MonoBehaviour:
   m_ObjectHideFlags: 0

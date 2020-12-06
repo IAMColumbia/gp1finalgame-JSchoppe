@@ -176,11 +176,11 @@ public class CombatUnit : TileActor
     private LinkedList<Vector2Int> movePath;
     public LinkedList<Vector2Int> MovePath
     {
+        get { return movePath; }
         set
         {
             movePath = value;
             PathChanged?.Invoke(movePath.ToArray());
         }
-        get { return movePath; }
     }
 }

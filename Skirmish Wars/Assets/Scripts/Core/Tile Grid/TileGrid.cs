@@ -33,7 +33,7 @@ public sealed class TileGrid
         Terrain = new Dictionary<Vector2Int, TileTerrain>();
         for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++)
-                Terrain.Add(new Vector2Int(x, y), default(TileTerrain));
+                Terrain.Add(new Vector2Int(x, y), default);
         // Initialize A* collection.
         routeData = new RouteNodeData[width, height];
     }

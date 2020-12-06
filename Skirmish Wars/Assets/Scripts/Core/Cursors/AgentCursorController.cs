@@ -47,6 +47,12 @@ public sealed class AgentCursorController : CursorController
     /// </summary>
     public override event Action<Vector2> SecondaryReleased;
     #endregion
+    #region Agent Events
+    /// <summary>
+    /// Called whenever the queued actions have been exhausted.
+    /// </summary>
+    public event Action ActionsExhausted;
+    #endregion
     #region State Fields
     private List<CursorAction> actions;
     private CursorAction currentAction;
@@ -184,7 +190,10 @@ public sealed class AgentCursorController : CursorController
             UpdateContext.Update += OnUpdateToStart;
         }
         else
+        {
+            ActionsExhausted?.Invoke();
             actionState = ActionState.AwaitingAction;
+        }
     }
     #endregion
     #region Cursor Action Methods
