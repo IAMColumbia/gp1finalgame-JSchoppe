@@ -9,7 +9,7 @@ public static class LinkedListExtensions
     /// <summary>
     /// Removes elements from the end of the list until fromElement is reached.
     /// </summary>
-    /// <param name="list">The linked list to truncate</param>
+    /// <param name="list">The linked list to truncate.</param>
     /// <param name="toElement">The value or reference to truncate towards.</param>
     public static void Truncate<T>(this LinkedList<T> list, T toElement)
         where T : IEquatable<T>

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SkirmishWars.UnityRenderers;
 
 namespace SkirmishWars.Tests
 {
@@ -19,7 +20,9 @@ namespace SkirmishWars.Tests
             damageTable = parser.GetFirstDamageTable();
 
             parser.GetAllPreplacedActors(grid);
-            parser.GetAllPreplacedCommanders(grid, damageTable);
+            Commander[] commanders = parser.GetAllPreplacedCommanders(grid, damageTable);
+
+            FindObjectOfType<CommanderPanelManager>().InitializeCommanders(commanders);
 
             StartCoroutine(WaitInitThenStart());
         }

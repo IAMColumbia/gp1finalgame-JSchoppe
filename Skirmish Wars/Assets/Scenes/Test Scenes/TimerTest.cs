@@ -4,8 +4,16 @@ using SkirmishWars.UnityRenderers;
 
 namespace SkirmishWars.Tests
 {
+    /// <summary>
+    /// Implements tests for a unity driven timer.
+    /// </summary>
     public sealed class TimerTest : MonoBehaviour
     {
+        #region Inspector Fields
+        [Tooltip("The timer renderer that observes the underlying timer.")]
+        [SerializeField] private TimerRenderer timerRenderer = null;
+        [Tooltip("The testing behaviour to run.")]
+        [SerializeField] private TestType test = TestType.TimerEvents;
         private enum TestType : byte
         {
             TimerEvents,
@@ -13,9 +21,7 @@ namespace SkirmishWars.Tests
             TimeScalePause,
             TimeScaleSlowMotion
         }
-
-        [SerializeField] private TimerRenderer timerRenderer = null;
-        [SerializeField] private TestType test = TestType.TimerEvents;
+        #endregion
 
         private void Start()
         {
