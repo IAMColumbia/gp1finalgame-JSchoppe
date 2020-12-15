@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using SkirmishWars.Unity;
+using SkirmishWars.UnityRenderers;
 
 namespace SkirmishWars.UnityEditor
 {
@@ -12,6 +14,10 @@ namespace SkirmishWars.UnityEditor
         [SerializeField] private byte teamID = 0;
         [Tooltip("The cursor controller for this commander.")]
         [SerializeField] private PlayerCursorControllerInstance controller = null;
+        [Tooltip("The listener for remaining buttom commands.")]
+        [SerializeField] private CommanderButtonsListener buttonsListener = null;
+        [Tooltip("The pause curtain for this player.")]
+        [SerializeField] private PauseCurtainRenderer pauseCurtain = null;
         #endregion
         #region Retrieval Method
         /// <summary>
@@ -22,8 +28,11 @@ namespace SkirmishWars.UnityEditor
         {
             // Create the new commander and add it to the grid.
             PlayerCommander commander = 
-                new PlayerCommander(teamID, grid, controller.GetInstance(grid));
+                new PlayerCommander(teamID, grid, controller.GetInstance(grid), buttonsListener);
             grid.Commanders.Add(commander);
+            // Bind the pause curtain to the new player.
+            // TODO this approach does not support multiple human players.
+            pauseCurtain.DrivingCommander = commander;
             // Destroy this script's Monobehaviour baggage,
             // and return the lightweight instance.
             Destroy(this);

@@ -5,16 +5,20 @@ using SkirmishWars.UnityEditor;
 
 namespace SkirmishWars.Tests
 {
+    /// <summary>
+    /// Implements tests for the agent cursor.
+    /// </summary>
     public sealed class AgentCursorTest : MonoBehaviour
     {
-
+        #region Inspector References
+        [SerializeField] private TileGridInstance gridInstance = null;
+        [SerializeField] private AgentCommanderInstance agentCommanderInstance = null;
+        [SerializeField] private TestType test = default;
         private enum TestType : byte
         {
             SimpleUnitMove
         }
-        [SerializeField] private TestType test = TestType.SimpleUnitMove;
-        [SerializeField] private TileGridInstance gridInstance = null;
-        [SerializeField] private AgentCommanderInstance agentCommanderInstance = null;
+        #endregion
 
         private void Awake()
         {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1620131799876604697}
   - component: {fileID: 4862581225888541391}
   - component: {fileID: 7568466260514881586}
+  - component: {fileID: 3580361115422197084}
   m_Layer: 0
   m_Name: Standard Phases
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   mapPhases:
   - {fileID: 4862581225888541391}
   - {fileID: 7568466260514881586}
+  - {fileID: 3580361115422197084}
 --- !u!114 &4862581225888541391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,3 +79,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilesPerSecond: 1
   confrontationPauseSeconds: 1
+--- !u!114 &3580361115422197084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7568466260514881587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f53e9b0ce6f6fef4eb1384f462633a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

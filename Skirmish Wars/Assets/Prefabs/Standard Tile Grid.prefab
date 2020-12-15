@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7443f66f3d1784699fd7677d0ffcc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 14
-  height: 8
+  width: 30
+  height: 16
   gridUnit: 1
   terrainMap: {fileID: 1167897924080081863}
   terrainData:
@@ -174,6 +174,11 @@ MonoBehaviour:
         moveCost: 1
         addedDefense: 0
     - unitType: 1
+      interactionData:
+        canTraverse: 1
+        moveCost: 1
+        addedDefense: 0
+    - unitType: 2
       interactionData:
         canTraverse: 1
         moveCost: 1
@@ -190,17 +195,44 @@ MonoBehaviour:
         canTraverse: 1
         moveCost: 1
         addedDefense: 0.3
+    - unitType: 2
+      interactionData:
+        canTraverse: 0
+        moveCost: 1
+        addedDefense: 0
   - whenSpriteUsed: {fileID: 21300000, guid: ef5e1a4d7b65aa84f8d04febf94b1e53, type: 3}
     interactions:
     - unitType: 0
       interactionData:
         canTraverse: 0
-        moveCost: 0
+        moveCost: 1
         addedDefense: 0
     - unitType: 1
       interactionData:
         canTraverse: 0
-        moveCost: 0
+        moveCost: 1
+        addedDefense: 0
+    - unitType: 2
+      interactionData:
+        canTraverse: 1
+        moveCost: 1
+        addedDefense: 0
+  - whenSpriteUsed: {fileID: 21300000, guid: baef69ed77182ae4badddc331b0afaf8, type: 3}
+    interactions:
+    - unitType: 0
+      interactionData:
+        canTraverse: 1
+        moveCost: 1
+        addedDefense: 0.4
+    - unitType: 1
+      interactionData:
+        canTraverse: 1
+        moveCost: 2
+        addedDefense: 0.1
+    - unitType: 2
+      interactionData:
+        canTraverse: 1
+        moveCost: 1
         addedDefense: 0
 --- !u!1 &5357367813961103075
 GameObject:

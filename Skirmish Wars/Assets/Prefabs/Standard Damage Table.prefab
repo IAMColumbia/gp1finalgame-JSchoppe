@@ -50,9 +50,24 @@ MonoBehaviour:
   - attackingUnit: 1
     defendingUnit: 1
     baseDamage: 0.6
-  - attackingUnit: 1
-    defendingUnit: 0
-    baseDamage: 0.7
+  - attackingUnit: 2
+    defendingUnit: 2
+    baseDamage: 0.4
   - attackingUnit: 0
     defendingUnit: 1
     baseDamage: 0.1
+  - attackingUnit: 0
+    defendingUnit: 2
+    baseDamage: 0.3
+  - attackingUnit: 1
+    defendingUnit: 0
+    baseDamage: 0.6
+  - attackingUnit: 1
+    defendingUnit: 2
+    baseDamage: 0.15
+  - attackingUnit: 2
+    defendingUnit: 0
+    baseDamage: 0.6
+  - attackingUnit: 2
+    defendingUnit: 1
+    baseDamage: 0.5

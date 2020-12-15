@@ -1,17 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
+using SkirmishWars.Unity;
 
 public sealed class PlayerCommander : Commander
 {
-    public PlayerCommander(byte teamID, TileGrid grid, CursorController controller)
+    // TODO pause functionality needs to be generalized
+    // for multiple human players.
+    private bool isPaused;
+
+    public event Action<bool> PauseStateChanged;
+
+    public PlayerCommander(byte teamID, TileGrid grid, CursorController controller, CommanderButtonsListener buttons)
         : base(teamID, grid, controller)
     {
         controller.SecondaryPressed += OnSecondaryPressed;
         controller.SecondaryReleased += OnSecondaryReleased;
+        buttons.PausePressed += TogglePause;
+        // TODO this is a very lazy way to quit the game.
+        buttons.ExitPressed += () => { Application.Quit(); };
         IsSpying = false;
+        isPaused = false;
     }
 
     private void OnSecondaryPressed(Vector2 location)
@@ -57,6 +65,20 @@ public sealed class PlayerCommander : Commander
 
     private void TogglePause()
     {
-
+        isPaused = !isPaused;
+        PauseStateChanged?.Invoke(isPaused);
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
+            foreach (Commander commander in grid.Commanders)
+                foreach (CombatUnit unit in commander.units)
+                    unit.PathShown = false;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            foreach (CombatUnit unit in units)
+                unit.PathShown = true;
+        }
     }
 }

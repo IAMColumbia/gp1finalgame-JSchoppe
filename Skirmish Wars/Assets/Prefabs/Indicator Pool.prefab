@@ -45,4 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileIndicatorPrefab: {fileID: 6339627803158620869, guid: 2cfeffc6d9c18274eb852a2494f31075,
     type: 3}
-  poolSize: 30
+  poolSize: 60
