@@ -1,3 +1,42 @@
+# Release 0.1 - Design Choices
+<details>
+<summary>This section documents the design choices made for release 0.1.</summary>
+
+## Controls Display, Pause + Escape Functionaliy
+Controls are now displayed in the lower left corner, and functionality for pausing and exiting
+the game have been added. In the current pause implementation, there cannot be multiple
+player commanders; pause state needs to be moved into a single accessible class.
+## New Unit: Helicopter, Forest Terrain
+Added Helicopter unit and Forest terrain tile as a continued scalability stress test. While the
+speed at which new units can be added as rapid, there is a notable exponential growth in inspector
+cascading complexity for the damage table and terrain interactions. With this in mind, it might
+be better to read in damage table and terrain values from a csv spreadsheet.
+## Larger Asymetric Map
+The test map scale has been increased greatly to emphasize the early game of setting up units
+for future engagements. More time is granted in the early game since the time is proportional to
+the unit count. The AI has a slight numbers disadvantage but can still win if they seek favorable
+engagements.
+## Win Condition
+A win condition check has been added that will reset the test map. The win condition is currently
+hard coded in a way that is not easily abstractable (not easy to define other win conditions besides
+defeating all units).
+<br>
+It is known that the win condition can be easily achieved by stacking all player units on one tile.
+What happens when units stack needs to be determined.
+## Known Code Issues
+MonoBehaviour dependence has increased in this update. More items need to be converted to designer 
+instances to decouple from the Unity engine.
+<br>
+Phases depend entirely on MonoBehaviour, when they should be part of the core code.
+<br>
+Escape functionality crashes Unity (Application.Quit called in an improper place?)
+## Known Gameplay Issues
+Cursor state bug between rounds does not reset properly (does not clear down state).
+<br>
+Moving an arrow back over itself causes strange path continuity sometimes.
+
+</details>
+
 # Vertical Slice - Design Choices
 <details>
 <summary>This section documents the design choices made for the vertical slice build.</summary>
