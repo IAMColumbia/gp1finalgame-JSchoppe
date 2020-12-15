@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="AgentCommander">
+    <Position X="21.25" Y="12" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>CAQgEAAAABgAAAAAAAAAAAAAAAAEAAAAABAEAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Commanders\AgentCommander.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Commander">
+    <Position X="26" Y="7.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAIAAAEAAABAAABCQAAQAgAAAQAEAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Commanders\Commander.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerCommander">
+    <Position X="27.75" Y="12" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAQBAAAAAAAACABCAAACAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Commanders\PlayerCommander.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CursorAction">
+    <Position X="35" Y="21.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Cursors\AgentCursorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AgentCursorController">
+    <Position X="32" Y="19" Width="2.75" />
+    <NestedTypes>
+      <Enum Name="AgentCursorController.ActionState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Core\Cursors\AgentCursorController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAEASAAIAkBQAQAAAAAQwEAAgQAAAAgAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Cursors\AgentCursorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CursorController">
+    <Position X="21.75" Y="18" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AgAAAiaAAQIAAQAAAAEgAgAyAAAAQAEAAAQQACAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Cursors\CursorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerCursorController">
+    <Position X="26" Y="19" Width="2.75" />
+    <InheritanceLine Type="CursorController" FixedFromPoint="true">
+      <Path>
+        <Point X="25.75" Y="21.312" />
+        <Point X="26" Y="21.312" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAggAAQAAEAEAIEAAAQgAQAEAAAQAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Cursors\PlayerCursorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AttackPhase">
+    <Position X="10.25" Y="17" Width="3" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="AttackPhase.UnitAnimationState">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Core\Gameplay Flow\Phases\AttackPhase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAhAkAoAAAwBAAAAAAAAEAAACAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Core\Gameplay Flow\Phases\AttackPhase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckWinStatePhase">
+    <Position X="13.5" Y="17" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Gameplay Flow\Phases\CheckWinStatePhase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommandPhase">
+    <Position X="7.5" Y="17" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAQAAAIIAAAAAAACAAAAAEAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Core\Gameplay Flow\Phases\CommandPhase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Phase">
+    <Position X="5.75" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Gameplay Flow\Phase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PhaseManager">
+    <Position X="3" Y="16.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAABAAAAAAAAAAAAAAEEAAAAAAg=</HashCode>
+      <FileName>Assets\Scripts\Core\Gameplay Flow\PhaseManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Timer">
+    <Position X="15.25" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAIAEAACBABgAAAoQAAAAIIAEAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Gameplay Flow\Timer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CombatUnit">
+    <Position X="7.25" Y="7.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>BACAAGAEAAAAgAQAAAAEBAICAAABAAgAIAQIBAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\Core\Tile Grid\Tile Actors\CombatUnit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileActor">
+    <Position X="4.5" Y="7" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAiAAAAIAAAAAAAIAAABGAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Tile Grid\Tile Actors\TileActor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamageTable">
+    <Position X="49" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Tile Grid\DamageTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileGrid">
+    <Position X="42.5" Y="8.25" Width="3.25" />
+    <NestedTypes>
+      <Struct Name="TileGrid.RouteNodeData" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Core\Tile Grid\TileGrid.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQCAAACACAAoAQgQACAAKAIAAAAAIAAAEAAAAAAEUg=</HashCode>
+      <FileName>Assets\Scripts\Core\Tile Grid\TileGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileTerrain">
+    <Position X="6.25" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Tile Grid\TileTerrain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityRenderers.CombatUnitRenderer">
+    <Position X="10.25" Y="9.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ABAAgRIBAAAAQBAAAQAAAAAAgIAAIAAAAACSABAAEEA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Renderers\CombatUnitRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityRenderers.CommanderPanelManager">
+    <Position X="45.5" Y="3" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAEAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Renderers\CommanderPanelManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityRenderers.CommanderPanelRenderer">
+    <Position X="49" Y="3.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AQQAAQAAAAAAAEAAIAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Renderers\CommanderPanelRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityRenderers.CursorRenderer">
+    <Position X="18.75" Y="19" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>UAAAIAIEAAAABQAAAAIAAgAAACCAAAAAEAAAAAAQAEA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Renderers\CursorRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityRenderers.SpriteChainRenderer">
+    <Position X="13.5" Y="7.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BAABIAAAAAAAEIAAARAABAAAAAAAAAAAAAAAAAAAgEA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Renderers\SpriteChainRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityRenderers.TimerRenderer">
+    <Position X="20.5" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAhAAAAAEAAAAAAEABABAEABAAAABAAABASAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Renderers\TimerRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team">
+    <Position X="39.75" Y="2.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAgAAAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\TeamsSingleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TeamsSingleton">
+    <Position X="37" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAACAAEAAAAAABAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\TeamsSingleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileIndicatorPool">
+    <Position X="13.5" Y="11.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAggAAAAAEAAAIAQAAAAAAAAAgAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\TileIndicatorPool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnitySceneParser" BaseTypeListCollapsed="true">
+    <Position X="30.5" Y="1.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAEAAAAQAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\UnitySceneParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UpdateContext">
+    <Position X="17.75" Y="1.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="UpdateContext.UpdateSingleton">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Designer - Unity\UpdateSingleton.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAQAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\UpdateSingleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.Unity.CommanderButtonsListener">
+    <Position X="43.75" Y="16.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAABAAAAAAAAQBAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Input\CommanderButtonsListener.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.Unity.MouseListener">
+    <Position X="40.5" Y="16.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAIAAAAAAAACAAAAASAAAABAAAABCAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Input\MouseListener.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityEditor.AgentCommanderInstance">
+    <Position X="24.25" Y="12.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAEAAAEAAAAABAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Scene Instances\AgentCommanderInstance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityEditor.AgentCursorControllerInstance">
+    <Position X="35" Y="19.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAEAAAAABAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Scene Instances\AgentCursorControllerInstance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityEditor.CombatUnitInstance">
+    <Position X="10.25" Y="7.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAABAAAAgAAAAAEAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Scene Instances\CombatUnitInstance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityEditor.DamageTableInstance">
+    <Position X="51.25" Y="9.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Scene Instances\DamageTableInstance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityEditor.PlayerCommanderInstance">
+    <Position X="30.75" Y="12.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAEAAAAAAAAABAAAAgAAAAAAAAAAAAI=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Scene Instances\PlayerCommanderInstance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityEditor.PlayerCursorControllerInstance">
+    <Position X="29" Y="19.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAACAAAAAAAABIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Scene Instances\PlayerCursorControllerInstance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkirmishWars.UnityEditor.TileGridInstance">
+    <Position X="46" Y="8.5" Width="2.75" />
+    <NestedTypes>
+      <Class Name="SkirmishWars.UnityEditor.TileGridInstance.SpriteInteractionsPair" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Designer - Unity\Scene Instances\TileGridInstance.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Struct Name="SkirmishWars.UnityEditor.TileGridInstance.UnitInteraction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Designer - Unity\Scene Instances\TileGridInstance.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACIAAAQAwAEAAAAABAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer - Unity\Scene Instances\TileGridInstance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="UnitTerrainData">
+    <Position X="9" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAgAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Tile Grid\TileTerrain.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="IDesignerParser">
+    <Position X="27.25" Y="1" Width="3" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAEAAAAQAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Designer\IDesignerParser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
