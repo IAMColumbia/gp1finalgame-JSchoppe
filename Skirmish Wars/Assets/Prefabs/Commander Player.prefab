@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1066859955828424758}
   - component: {fileID: 1066859955828424754}
   - component: {fileID: 1066859955828424759}
+  - component: {fileID: 3723375013387190721}
   - component: {fileID: 1066859955828424752}
   m_Layer: 0
   m_Name: Commander Player
@@ -51,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamID: 0
   controller: {fileID: 1066859955828424758}
+  buttonsListener: {fileID: 3723375013387190721}
 --- !u!114 &1066859955828424758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,6 +94,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51160c254dacc634686d83da9827ed2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3723375013387190721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066859955828424764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d2186bf9ae9c04291ac42086f12094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1066859955828424752
@@ -150,6 +164,36 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: bdfdb7c9-47f3-4942-abc8-eff2172a3625
     m_ActionName: Stage Gameplay/Spy[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3723375013387190721}
+        m_MethodName: OnPauseButtonAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 553d7947-633e-4e14-9573-5f2ff779ab6c
+    m_ActionName: Stage Gameplay/Pause[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3723375013387190721}
+        m_MethodName: OnExitButtonAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 647cc860-2676-48c5-b07d-227756fb0d4b
+    m_ActionName: Stage Gameplay/Exit[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Stage Gameplay
