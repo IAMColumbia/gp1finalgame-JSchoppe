@@ -1,7 +1,9 @@
 # Skirmish Wars
 An experimental gameplay concept that combines turn based and real time strategy elements
 in tile based unit combat.
-<br><br>
+<br>
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/thumbnail.jpg">
+<br>
 Skirmish Wars seeks to experiment with turn based formulas by questioning a fundamental
 component of the Wars strategy gameplay. Instead of players taking turns moving units,
 this game allows both players to command units at the same time and at the end of a turn
@@ -38,7 +40,7 @@ react to their opponents strategy.
    - [Visual Studio](https://visualstudio.microsoft.com)
    - [GitHub](https://github.com/github)
 
-## Releases
+## Releases & Post-Mortems
 <details>
 <summary>Release 0.1</summary>
  
@@ -50,11 +52,54 @@ react to their opponents strategy.
 - prototype ui with unit counts, and controls
 - pausing mechanism that blocks current gameplay
 
+<details>
+<summary>Postmortem</summary>
+
+## Progress Overview
+Many of the desired features were realized in this release. The primary lacking
+feature from the proposal is a fully fleshed out combat phase. I realized that
+during development that there are more edge cases with unit movement that would be
+worth addressing (ie what happens when units are within a half unit during movement).
+I did not foresee these complexities.
+
+Overall, a decent slice of the codebase is Unity independent. Everything within the core
+folder is meant to be, but the phases have yet to be generalized away from MonoBehaviour.
+Reusability could be further improved by wrapping more components of the engine. Mathf and
+Vectors are a prime example where creating a wrapper could greatly increase mobility.
+## UML Analysis
+### Combat Units
+The combat units have a good foundation in being MonoBehaviour independent, they largely act as state
+containers and it could be argued that the movement based methods should be asbtracted away (ie `RefreshMoveOptions()`).
+It is questionable whether the tile actor base class is neccasary. I placed this base class in place under the circumstance
+than a non-unit tile entity might be added later. The `SpriteChainRenderer` is a class that admittedly contains
+a lot of implementation that is engine specific when it doesn't need to be. Although a core class may not be appropriate,
+some of the underlying logic would fit much better in a helper class. The same can be said about `TileIndicatorPool`.
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/release-0.1/combat-unit-uml.jpg">
+### Commanders
+The commander classes I am pretty happy with, they are fairly easily extended without MonoBehaviour dependence.
+The AI behavior is very primitive, this problem itself begs a lot of thought into how complex the AI thought should
+be and how computationally expensive it would be under scaling map sizes.
+As a side note; all cases of classes postfixed by `Instance` are constructors implemented using Unity scene instances.
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/release-0.1/commander-uml.jpg">
+#### Commander Panels
+The commander panel is a UI element that was implemented very late in the project cycle. The improvements here are obvious;
+abstract away from MonoBehaviour and implement their accessibility through `IDesignerParser`.
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/release-0.1/commander-panel-uml.jpg">
+### Cursors
+While cursors are typically very simple, for this game I wanted player to be able to see each others moves during playtime.
+This was achieved through the cursor controller and it's Unity renderer. I think this is maybe one of the best examples of engine
+independency and how more of the project should be modeled. All of the cursor controller functionality, including visual state, is
+on the core level. Unity only handles the movement of the sprite object and applying the changes in visual state. Although notably
+the use of events is perhaps not the best solution, given that there is only one intended listener it may be better to use delegates
+directly in this pattern.
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/release-0.1/cursor-uml.jpg">
+</details>
+
 </details>
 
 ## Project Proposal
 <details>
-<summary>The intial proposal for the project</summary>
+<summary>The initial proposal for the project</summary>
  
 Genre: 2D Tile-based Stategy
 
