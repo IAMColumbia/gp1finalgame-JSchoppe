@@ -1,4 +1,9 @@
 # Skirmish Wars
+
+# Project Proposal
+<details>
+<summary>The intial proposal for the project.</summary>
+ 
 Genre: 2D Tile-based Stategy
 
 Skirmish Wars is an experimental gameplay concept that seeks to challenge some
@@ -116,3 +121,4 @@ that other classes can quickly access when doing damage calculations.
 
 <img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme Images/uml-damage-table.jpg">
 
+</details>
