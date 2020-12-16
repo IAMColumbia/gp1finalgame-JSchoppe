@@ -21,8 +21,8 @@ react to their opponents strategy.
     <img src="https://avatars1.githubusercontent.com/u/38409262?s=460&u=f0e7f13731979e49c5f6240ee56c6556bb88a5fa&v=4" width="50px">
     <img src="https://avatars1.githubusercontent.com/u/1069059?s=460&u=d7795dacb9505f51922adc41b66e728f3fa54cd1&v=4" width="50px">
     <img src="https://avatars0.githubusercontent.com/u/44657886?s=460&u=1db6506050691e865b13678cedb08a260a4d4cff&v=4" width="50px">
-    <img src="https://avatars3.githubusercontent.com/u/44095303?s=460&v=4" width="50px">
-    <img src="https://avatars0.githubusercontent.com/u/36770934?s=460&v=4" width="50px">
+    <img src="https://avatars0.githubusercontent.com/u/54965702?s=460&u=8ca37de9a002d3f39fa7cadb84fb76363b78ac6b&v=4" width="50px">
+    <img src="https://avatars0.githubusercontent.com/u/51983062?s=460&u=9d932597693b910276f21a29d1bfcfc3a93541fc&v=4" width="50px">
   </div>
 </div>
 
@@ -31,8 +31,8 @@ react to their opponents strategy.
  - Feedback/Code Review
    - [Jeff Meyers](https://github.com/dsp56001)
    - [David Nichol](https://github.com/DavidJNichol)
-   - [Michael Nadasky](https://github.com/mike12699)
-   - [Ian Jeannin](https://github.com/IanJeannin)
+   - [Brendan Lienau](https://github.com/Kobakat)
+   - [Andy Ocampo](https://github.com/andyocampo)
  - Open Source Toolchain
    - [Paint.NET](https://github.com/paintdotnet)
  - Closed Source Toolchain
