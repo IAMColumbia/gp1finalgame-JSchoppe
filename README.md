@@ -69,7 +69,7 @@ Vectors are a prime example where creating a wrapper could greatly increase mobi
 ## UML Analysis
 ### Combat Units
 The combat units have a good foundation in being MonoBehaviour independent, they largely act as state
-containers and it could be argued that the movement based methods should be asbtracted away (ie `RefreshMoveOptions()`).
+containers and it could be argued that the movement based methods should be abstracted away (ie `RefreshMoveOptions()`).
 It is questionable whether the tile actor base class is neccasary. I placed this base class in place under the circumstance
 than a non-unit tile entity might be added later. The `SpriteChainRenderer` is a class that admittedly contains
 a lot of implementation that is engine specific when it doesn't need to be. Although a core class may not be appropriate,
@@ -93,6 +93,40 @@ on the core level. Unity only handles the movement of the sprite object and appl
 the use of events is perhaps not the best solution, given that there is only one intended listener it may be better to use delegates
 directly in this pattern.
 <img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/release-0.1/cursor-uml.jpg">
+### Tile Grid
+The grid serves largely as the main highway for actors in the game to observe other actors. Initially it was just meant to represent the
+data of the grid. The fact that many classes depend on the grid poses some encapsulation problems. It may have been wiser to partition
+the accessors and methods in some way, whether it be by a referenced instance or by partitioning interfaces. The gird also contains the
+A* implementation, which should certainly be abstracted into a utility. Also shown here is the damage table, which is implemented using a
+two dimensional accessor. This solution is efficient and fairly easy to scale, but is hard to effectively implement in the unity designer;
+a spreadsheet should probably be used instead for this purpose.
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/release-0.1/tile-grid-uml.jpg">
+### Phases
+Phases are largely dependent on Unity in their current implementation; although they very much could be abstracted away using
+a similar technique to other classes using designer `Instance` classes. The phases could use a lot of work on the animation
+front, as well as telegraphing to improve user experience. There is some attrocious last second code in here as well when it
+comes to calculating damage on the unit clusters each step that needs further refactoring.
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/release-0.1/phases-uml.jpg">
+### Terrain
+The tile terrain is implemented in such a way where an accessor is used to get terrain data for a specific unit type. This works
+well and is scalable. Multiple tiles on a grid can point to the same terrain data and accessor.
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/release-0.1/terrain-uml.jpg">
+### Teams
+Team association is one of the features in the game that still needs to be tested for scalability. The singleton should be abstracted
+from monobehavior and perhaps should not be a static singleton (similar to how grid is not a static singleton).
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/release-0.1/teams-uml.jpg">
+### Timing
+The `Timer` class implemented here latches onto the unity engine update loop (some other classes do as well). The `UpdateContext` should
+be defined using an interface so that it can be retargeted easily to other engines. The Timer itself is a very standard timer implementation
+that triggers events.
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/release-0.1/timer-uml.jpg">
+### Design Parser
+The `IDesignerParser` interface shown here is meant to request the utilized engine a means with which the game should process initialization
+of a designed map. The exposed methods could use much refinement in how they access design elements; in the current build they are meant to
+facilitate a very basic map. In the future this interface and its implementation should be much more fleshed out to minimize the amount
+of engine specific code required to load more complex stages.
+<img src="https://github.com/IAMColumbia/gp1finalgame-JSchoppe/blob/master/Documentation/Readme%20Images/release-0.1/designer-parser-uml.jpg">
+
 </details>
 
 </details>
